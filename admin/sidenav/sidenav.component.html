@@ -1,0 +1,438 @@
+<clr-vertical-nav [clrVerticalNavCollapsible]="true">
+  <a
+    clrVerticalNavLink
+    title="平台概览"
+    routerLink="reportform/overview"
+    routerLinkActive="active">
+    <clr-icon clrVerticalNavIcon shape="help-info"></clr-icon>
+    平台概览
+  </a>
+  <div class="nav-divider"></div>
+  <clr-vertical-nav-group
+    routerLinkActive="active">
+    <clr-icon shape="image-gallery" title="系统概览" clrVerticalNavIcon></clr-icon>
+    系统统计
+    <clr-vertical-nav-group-children>
+      <a clrVerticalNavLink
+         routerLink="reportform/app"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        项目报表
+      </a>
+    </clr-vertical-nav-group-children>
+    <clr-vertical-nav-group-children>
+      <a clrVerticalNavLink
+         routerLink="reportform/deploy"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        上线统计
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <clr-vertical-nav-group
+    routerLinkActive="active">
+    <clr-icon shape="cog" title="系统信息" clrVerticalNavIcon></clr-icon>
+    配置
+    <clr-vertical-nav-group-children>
+      <a clrVerticalNavLink
+         routerLink="config/system"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        系统配置
+      </a>
+    </clr-vertical-nav-group-children>
+    <clr-vertical-nav-group-children>
+      <a clrVerticalNavLink
+         routerLink="config/database"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        数据库配置
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <clr-vertical-nav-group
+    routerLinkActive="active">
+    <clr-icon shape="users" title="权限" clrVerticalNavIcon></clr-icon>
+    权限
+    <clr-vertical-nav-group-children>
+      <a clrVerticalNavLink
+         routerLink="system/user"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        用户列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="system/group"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        角色列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="system/permission"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        权限列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="apikey"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        APIKeys
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <div class="nav-divider"></div>
+  <clr-vertical-nav-group
+    routerLinkActive="active">
+    <clr-icon shape="cloud-scale" title="集群" clrVerticalNavIcon></clr-icon>
+    集群
+    <clr-vertical-nav-group-children *clrIfExpanded="false">
+      <a clrVerticalNavLink
+         [routerLink]="['cluster']"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        列表
+      </a>
+      <a clrVerticalNavLink
+         [routerLink]="['cluster/trash']"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        回收站
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <clr-vertical-nav-group
+    routerLinkActive="active">
+    <clr-icon shape="vmw-app" title="命名空间" clrVerticalNavIcon></clr-icon>
+    命名空间
+    <clr-vertical-nav-group-children *clrIfExpanded="false">
+      <a clrVerticalNavLink
+         routerLink="namespace"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="namespace/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        回收站
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <clr-vertical-nav-group
+    routerLinkActive="active">
+    <clr-icon shape="window-restore" title="项目" clrVerticalNavIcon></clr-icon>
+    项目
+    <clr-vertical-nav-group-children *clrIfExpanded="false">
+      <a clrVerticalNavLink
+         routerLink="app"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="app/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        回收站
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <div class="nav-divider"></div>
+  <clr-vertical-nav-group
+    routerLinkActive="active">
+    <clr-icon shape="event" title="部署" clrVerticalNavIcon></clr-icon>
+    部署
+    <clr-vertical-nav-group-children *clrIfExpanded="false">
+      <a clrVerticalNavLink
+         routerLink="deployment"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="deployment/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        回收站
+      </a>
+      <a clrVerticalNavLink
+         routerLink="deployment/tpl"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        模版列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="deployment/tpl/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        模版回收站
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+
+
+  <clr-vertical-nav-group routerLinkActive="active">
+    <clr-icon shape="blocks-group" title="状态副本集" clrVerticalNavIcon></clr-icon>
+    状态副本集
+    <clr-vertical-nav-group-children *clrIfExpanded="false">
+      <a clrVerticalNavLink
+         routerLink="statefulset"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="statefulset/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        回收站
+      </a>
+      <a clrVerticalNavLink
+         routerLink="statefulset/tpl"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        模版列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="statefulset/tpl/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        模版回收站
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <clr-vertical-nav-group routerLinkActive="active">
+    <clr-icon shape="layers" title="守护进程集" clrVerticalNavIcon></clr-icon>
+    守护进程集
+    <clr-vertical-nav-group-children *clrIfExpanded="false">
+      <a clrVerticalNavLink
+         routerLink="daemonset"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="daemonset/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        回收站
+      </a>
+      <a clrVerticalNavLink
+         routerLink="daemonset/tpl"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        模版列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="daemonset/tpl/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        模版回收站
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <clr-vertical-nav-group routerLinkActive="active">
+    <clr-icon shape="clock" title="计划任务" clrVerticalNavIcon></clr-icon>
+    计划任务
+    <clr-vertical-nav-group-children *clrIfExpanded="false">
+      <a clrVerticalNavLink
+         routerLink="cronjob"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+       列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="cronjob/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        回收站
+      </a>
+      <a clrVerticalNavLink
+         routerLink="cronjob/tpl"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        模版列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="cronjob/tpl/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        模版回收站
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <ng-container>
+    <ng-container>
+      <div class="nav-divider"></div>
+      <clr-vertical-nav-group
+        routerLinkActive="active">
+        <clr-icon shape="network-globe" title="负载均衡" clrVerticalNavIcon></clr-icon>
+        负载均衡
+        <clr-vertical-nav-group-children *clrIfExpanded="false">
+          <a clrVerticalNavLink
+            routerLink="service"
+            [routerLinkActiveOptions]="{exact:true}"
+            routerLinkActive="active">
+            列表
+          </a>
+          <a clrVerticalNavLink
+            routerLink="service/trash"
+            [routerLinkActiveOptions]="{exact:true}"
+            routerLinkActive="active">
+            回收站
+          </a>
+          <a clrVerticalNavLink
+            routerLink="service/tpl"
+            [routerLinkActiveOptions]="{exact:true}"
+            routerLinkActive="active">
+            模版列表
+          </a>
+          <a clrVerticalNavLink
+            routerLink="service/tpl/trash"
+            [routerLinkActiveOptions]="{exact:true}"
+            routerLinkActive="active">
+            模版回收站
+          </a>
+        </clr-vertical-nav-group-children>
+      </clr-vertical-nav-group>
+    </ng-container>
+  </ng-container>
+  <div class="nav-divider"></div>
+  <clr-vertical-nav-group routerLinkActive="active">
+    <clr-icon shape="file-settings" title="配置集" clrVerticalNavIcon></clr-icon>
+    配置集
+    <clr-vertical-nav-group-children *clrIfExpanded="false">
+      <a clrVerticalNavLink
+         routerLink="configmap"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+       列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="configmap/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        回收站
+      </a>
+      <a clrVerticalNavLink
+         routerLink="configmap/tpl"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        模版列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="configmap/tpl/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        模版回收站
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <clr-vertical-nav-group routerLinkActive="active">
+    <clr-icon shape="certificate" title="加密字典" clrVerticalNavIcon></clr-icon>
+    加密字典
+    <clr-vertical-nav-group-children *clrIfExpanded="false">
+      <a clrVerticalNavLink
+         routerLink="secret"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="secret/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        回收站
+      </a>
+      <a clrVerticalNavLink
+         routerLink="secret/tpl"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+       模板列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="secret/tpl/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        模板回收站
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <clr-vertical-nav-group routerLinkActive="active">
+    <clr-icon shape="storage" title="PVC" class="is-solid" clrVerticalNavIcon></clr-icon>
+    PVC
+    <clr-vertical-nav-group-children *clrIfExpanded="false">
+      <a clrVerticalNavLink
+         routerLink="persistentvolumeclaim"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="persistentvolumeclaim/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        回收站
+      </a>
+      <a clrVerticalNavLink
+         routerLink="persistentvolumeclaim/tpl"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        模板列表
+      </a>
+      <a clrVerticalNavLink
+         routerLink="persistentvolumeclaim/tpl/trash"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        模板回收站
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <div class="nav-divider"></div>
+  <clr-vertical-nav-group routerLinkActive="active">
+    <clr-icon shape="bell" title="通知审计" class="is-solid" clrVerticalNavIcon></clr-icon>
+     通知审计
+    <clr-vertical-nav-group-children *clrIfExpanded="false">
+      <a clrVerticalNavLink routerLink="notification" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="bell"></clr-icon>
+        通知
+      </a>
+      <a clrVerticalNavLink routerLink="auditlog" routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="file-group"></clr-icon>
+        审计日志
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+
+  <div class="nav-divider"></div>
+  <clr-vertical-nav-group routerLinkActive="active">
+    <clr-icon shape="world" title="Kubernetes" class="is-solid" clrVerticalNavIcon></clr-icon>
+    Kubernetes
+    <clr-vertical-nav-group-children *clrIfExpanded="false">
+      <a clrVerticalNavLink
+         routerLink="kubernetes/dashboard"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="dashboard"></clr-icon>
+        Dashboard
+      </a>
+      <a clrVerticalNavLink
+         routerLink="kubernetes/node"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="devices"></clr-icon>
+        Node
+      </a>
+      <a clrVerticalNavLink
+         routerLink="kubernetes/persistentvolume"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="storage"></clr-icon>
+        PersistentVolume
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+
+</clr-vertical-nav>
