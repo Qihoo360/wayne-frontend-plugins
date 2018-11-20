@@ -73,7 +73,8 @@
          routerLinkActive="active">
         权限列表
       </a>
-      <a clrVerticalNavLink
+      <a *ngIf="this.authService.config['enableApiKeys']"
+         clrVerticalNavLink
          routerLink="apikey"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
