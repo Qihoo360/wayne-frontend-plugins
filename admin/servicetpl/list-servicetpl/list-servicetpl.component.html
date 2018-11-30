@@ -20,13 +20,13 @@
     </ng-container>
   </clr-dg-column>
   <clr-dg-column [clrDgSortBy]="'createTime'">
-      <ng-container *clrDgHideableColumn="{hidden: false}">
-          创建时间
-      </ng-container>
+    <ng-container *clrDgHideableColumn="{hidden: false}">
+      创建时间
+    </ng-container>
   </clr-dg-column>
   <clr-dg-row *ngFor="let serviceTpl of serviceTpls" [clrDgItem]="serviceTpl">
     <clr-dg-action-overflow>
-      <button class="action-item" (click)="editServiceTpl(serviceTpl)" >编辑</button>
+      <button class="action-item" (click)="editServiceTpl(serviceTpl)">编辑</button>
       <button class="action-item" (click)="deleteServiceTpl(serviceTpl)">删除</button>
     </clr-dg-action-overflow>
     <clr-dg-cell>{{serviceTpl.id}}</clr-dg-cell>

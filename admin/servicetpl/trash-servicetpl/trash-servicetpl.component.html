@@ -31,8 +31,8 @@
       </clr-dg-column>
       <clr-dg-row *ngFor="let serviceTpl of serviceTpls" [clrDgItem]="serviceTpl">
         <clr-dg-action-overflow>
-          <button class="action-item" (click)="tplDetail(serviceTpl)" >模板详情</button>
-          <button class="action-item" (click)="recoverServiceTpl(serviceTpl)" >恢复</button>
+          <button class="action-item" (click)="tplDetail(serviceTpl)">模板详情</button>
+          <button class="action-item" (click)="recoverServiceTpl(serviceTpl)">恢复</button>
           <button class="action-item" (click)="deleteServiceTpl(serviceTpl)">彻底删除</button>
         </clr-dg-action-overflow>
         <clr-dg-cell>{{serviceTpl.id}}</clr-dg-cell>

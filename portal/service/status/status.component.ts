@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {CacheService} from "../../../../src/app/shared/auth/cache.service";
-import {MessageHandlerService} from "../../../../src/app/shared/message-handler/message-handler.service";
-import {ActivatedRoute} from "@angular/router";
-import {KubeService} from "../../../shared/model/kubernetes/service";
-import {ServiceClient} from "../../../shared/client/v1/kubernetes/service";
-import {ServiceTpl} from "../../../shared/model/servicetpl";
+import { CacheService } from '../../../../src/app/shared/auth/cache.service';
+import { MessageHandlerService } from '../../../../src/app/shared/message-handler/message-handler.service';
+import { ActivatedRoute } from '@angular/router';
+import { KubeService } from '../../../shared/model/kubernetes/service';
+import { ServiceClient } from '../../../shared/client/v1/kubernetes/service';
+import { ServiceTpl } from '../../../shared/model/servicetpl';
 
 @Component({
   selector: 'status',
@@ -32,12 +32,12 @@ export class ServiceStatusComponent {
     let ports = [];
     if (this.service && this.service.spec.ports) {
       for (let port of this.service.spec.ports) {
-        let nodePort = port.nodePort ? port.nodePort : port.port
+        let nodePort = port.nodePort ? port.nodePort : port.port;
         ports.push(
           `${port.targetPort}:${nodePort}/${port.protocol}`);
       }
     }
-    return ports.join(",")
+    return ports.join(',');
   }
 
   getSelectors() {
@@ -47,7 +47,7 @@ export class ServiceStatusComponent {
         lables.push(`${key}:${this.service.spec.selector[key]}`);
       });
     }
-    return lables
+    return lables;
   }
 
   newServiceStatus(cluster: string, serviceTpl: ServiceTpl) {

@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BreadcrumbService} from '../../../../src/app/shared/client/v1/breadcrumb.service';
-import {Router} from '@angular/router';
-import {State} from '@clr/angular';
-import {Service} from '../../../shared/model/service';
-import {Page} from '../../../../src/app/shared/page/page-state';
-import {AceEditorService} from '../../../../src/app/shared/ace-editor/ace-editor.service';
-import {AceEditorMsg} from '../../../../src/app/shared/ace-editor/ace-editor';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BreadcrumbService } from '../../../../src/app/shared/client/v1/breadcrumb.service';
+import { Router } from '@angular/router';
+import { State } from '@clr/angular';
+import { Service } from '../../../shared/model/service';
+import { Page } from '../../../../src/app/shared/page/page-state';
+import { AceEditorService } from '../../../../src/app/shared/ace-editor/ace-editor.service';
+import { AceEditorMsg } from '../../../../src/app/shared/ace-editor/ace-editor';
 
 @Component({
   selector: 'list-service',

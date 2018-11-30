@@ -1,5 +1,5 @@
-import {Service} from './service';
-import {PublishStatus} from '../../../src/app/shared/model/v1/publish-status';
+import { Service } from './service';
+import { PublishStatus } from '../../../src/app/shared/model/v1/publish-status';
 
 export class ServiceTpl {
   id: number;

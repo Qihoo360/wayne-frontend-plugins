@@ -1,19 +1,19 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {NgForm} from "@angular/forms";
-import {MessageHandlerService} from "../../../../src/app/shared/message-handler/message-handler.service";
-import {Cluster} from "../../../../src/app/shared/model/v1/cluster";
-import {CacheService} from "../../../../src/app/shared/auth/cache.service";
-import {ResourcesActionType} from "../../../../src/app/shared/shared.const";
-import {PublishStatus} from "../../../../src/app/shared/model/v1/publish-status";
-import {PublishStatusService} from "../../../../src/app/shared/client/v1/publishstatus.service";
-import {ServiceTpl} from "../../../shared/model/servicetpl";
-import {ServiceService} from "../../../shared/client/v1/service.service";
-import {ServiceClient} from "../../../shared/client/v1/kubernetes/service";
-import {Service} from "../../../shared/model/service";
-import {KubeService} from "../../../shared/model/kubernetes/service";
+import { NgForm } from '@angular/forms';
+import { MessageHandlerService } from '../../../../src/app/shared/message-handler/message-handler.service';
+import { Cluster } from '../../../../src/app/shared/model/v1/cluster';
+import { CacheService } from '../../../../src/app/shared/auth/cache.service';
+import { ResourcesActionType } from '../../../../src/app/shared/shared.const';
+import { PublishStatus } from '../../../../src/app/shared/model/v1/publish-status';
+import { PublishStatusService } from '../../../../src/app/shared/client/v1/publishstatus.service';
+import { ServiceTpl } from '../../../shared/model/servicetpl';
+import { ServiceService } from '../../../shared/client/v1/service.service';
+import { ServiceClient } from '../../../shared/client/v1/kubernetes/service';
+import { Service } from '../../../shared/model/service';
+import { KubeService } from '../../../shared/model/kubernetes/service';
 
 @Component({
   selector: 'publish-tpl',
@@ -47,10 +47,10 @@ export class PublishServiceTplComponent {
     this.actionType = actionType;
     this.forceOffline = false;
     if (actionType == ResourcesActionType.PUBLISH) {
-      this.title = "发布负载均衡[" + service.name + "]";
+      this.title = '发布负载均衡[' + service.name + ']';
       if (!service.metaData) {
-        this.messageHandlerService.warning("请先配置可发布集群");
-        return
+        this.messageHandlerService.warning('请先配置可发布集群');
+        return;
       }
       this.modalOpened = true;
       let metaData = JSON.parse(service.metaData);
@@ -58,17 +58,17 @@ export class PublishServiceTplComponent {
         if (this.cacheService.namespace.metaDataObj && this.cacheService.namespace.metaDataObj.clusterMeta[cluster]) {
           let c = new Cluster();
           c.name = cluster;
-          this.clusters.push(c)
+          this.clusters.push(c);
         }
       }
 
     } else if (actionType == ResourcesActionType.OFFLINE) {
-      this.title = "下线负载均衡[" + service.name + "]";
+      this.title = '下线负载均衡[' + service.name + ']';
       this.modalOpened = true;
       for (let state of serviceTpl.status) {
         let c = new Cluster();
         c.name = state.cluster;
-        this.clusters.push(c)
+        this.clusters.push(c);
       }
     }
 
@@ -106,11 +106,11 @@ export class PublishServiceTplComponent {
     if (status && status.length > 0) {
       for (let state of status) {
         if (state.cluster == cluster) {
-          return state
+          return state;
         }
       }
     }
-    return null
+    return null;
   }
 
   offline(cluster: Cluster) {
@@ -120,9 +120,9 @@ export class PublishServiceTplComponent {
         this.deletePublishStatus(state.id);
       },
       error => {
-        if (this.forceOffline){
+        if (this.forceOffline) {
           this.deletePublishStatus(state.id);
-        }else {
+        } else {
           this.messageHandlerService.handleError(error);
         }
       }
@@ -132,7 +132,7 @@ export class PublishServiceTplComponent {
   deletePublishStatus(id: number) {
     this.publishStatusService.deleteById(id).subscribe(
       response => {
-        this.messageHandlerService.showSuccess("下线成功！");
+        this.messageHandlerService.showSuccess('下线成功！');
         this.published.emit(true);
       },
       error => {
@@ -151,7 +151,7 @@ export class PublishServiceTplComponent {
       this.serviceTpl.id,
       kubeService).subscribe(
       response => {
-        this.messageHandlerService.showSuccess("发布成功！");
+        this.messageHandlerService.showSuccess('发布成功！');
         this.published.emit(true);
       },
       error => {

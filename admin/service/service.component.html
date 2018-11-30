@@ -5,10 +5,14 @@
     </div>
     <div class="row flex-items-xs-between" style="height:32px;">
       <div class="option-left">
-        <button class="btn btn-link" (click)="openModal()"><clr-icon shape="add"></clr-icon>创建服务</button>
+        <button class="btn btn-link" (click)="openModal()">
+          <clr-icon shape="add"></clr-icon>
+          创建服务
+        </button>
         <create-edit-service (create)="createService($event)"></create-edit-service>
       </div>
     </div>
-    <list-service [services]="services" (delete)="deleteService($event)" (edit)="editService($event)" (paginate)="retrieve($event)" [page]="pageState.page"></list-service>
+    <list-service [services]="services" (delete)="deleteService($event)" (edit)="editService($event)"
+                  (paginate)="retrieve($event)" [page]="pageState.page"></list-service>
   </div>
 </div>

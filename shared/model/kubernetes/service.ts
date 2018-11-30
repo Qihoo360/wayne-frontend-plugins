@@ -2,168 +2,182 @@
 
 
 export class LoadBalancerIngress {
-    ip: string;
-    hostname: string;
-    //[LoadBalancerIngress:]
+  ip: string;
+  hostname: string;
+  //[LoadBalancerIngress:]
 
 
-    //[end]
+  //[end]
 }
+
 export class LoadBalancerStatus {
-    ingress: LoadBalancerIngress[];
-    //[LoadBalancerStatus:]
+  ingress: LoadBalancerIngress[];
+  //[LoadBalancerStatus:]
 
 
-    //[end]
+  //[end]
 }
+
 export class ServiceStatus {
-    loadBalancer: LoadBalancerStatus;
-    //[ServiceStatus:]
+  loadBalancer: LoadBalancerStatus;
+  //[ServiceStatus:]
 
 
-    //[end]
+  //[end]
 }
+
 export class IntOrString {
-    //[IntOrString:]
+  //[IntOrString:]
 
 
-    //[end]
+  //[end]
 }
+
 export class ServicePort {
-    name: string;
-    protocol: string;
-    port: number;
-    targetPort: IntOrString;
-    nodePort: number;
-    //[ServicePort:]
+  name: string;
+  protocol: string;
+  port: number;
+  targetPort: IntOrString;
+  nodePort: number;
+  //[ServicePort:]
 
 
-    //[end]
+  //[end]
 }
+
 export class ServiceSpec {
-    ports: ServicePort[];
-    selector: {};
-    clusterIP: string;
-    type: string;
-    externalIPs: string[];
-    sessionAffinity: string;
-    loadBalancerIP: string;
-    loadBalancerSourceRanges: string[];
-    externalName: string;
-    externalTrafficPolicy: string;
-    healthCheckNodePort: number;
-    //[ServiceSpec:]
+  ports: ServicePort[];
+  selector: {};
+  clusterIP: string;
+  type: string;
+  externalIPs: string[];
+  sessionAffinity: string;
+  loadBalancerIP: string;
+  loadBalancerSourceRanges: string[];
+  externalName: string;
+  externalTrafficPolicy: string;
+  healthCheckNodePort: number;
+  //[ServiceSpec:]
 
 
-    //[end]
+  //[end]
 }
+
 export class StatusCause {
-    reason: string;
-    message: string;
-    field: string;
-    //[StatusCause:]
+  reason: string;
+  message: string;
+  field: string;
+  //[StatusCause:]
 
 
-    //[end]
+  //[end]
 }
+
 export class StatusDetails {
-    name: string;
-    group: string;
-    kind: string;
-    uid: string;
-    causes: StatusCause[];
-    retryAfterSeconds: number;
-    //[StatusDetails:]
+  name: string;
+  group: string;
+  kind: string;
+  uid: string;
+  causes: StatusCause[];
+  retryAfterSeconds: number;
+  //[StatusDetails:]
 
 
-    //[end]
+  //[end]
 }
+
 export class ListMeta {
-    selfLink: string;
-    resourceVersion: string;
-    //[ListMeta:]
+  selfLink: string;
+  resourceVersion: string;
+  //[ListMeta:]
 
 
-    //[end]
+  //[end]
 }
+
 export class Status {
-    kind: string;
-    apiVersion: string;
-    metadata: ListMeta;
-    status: string;
-    message: string;
-    reason: string;
-    details: StatusDetails;
-    code: number;
-    //[Status:]
+  kind: string;
+  apiVersion: string;
+  metadata: ListMeta;
+  status: string;
+  message: string;
+  reason: string;
+  details: StatusDetails;
+  code: number;
+  //[Status:]
 
 
-    //[end]
+  //[end]
 }
+
 export class Initializer {
-    name: string;
-    //[Initializer:]
+  name: string;
+  //[Initializer:]
 
 
-    //[end]
+  //[end]
 }
+
 export class Initializers {
-    pending: Initializer[];
-    result: Status;
-    //[Initializers:]
+  pending: Initializer[];
+  result: Status;
+  //[Initializers:]
 
 
-    //[end]
+  //[end]
 }
+
 export class OwnerReference {
-    apiVersion: string;
-    kind: string;
-    name: string;
-    uid: string;
-    controller: boolean;
-    blockOwnerDeletion: boolean;
-    //[OwnerReference:]
+  apiVersion: string;
+  kind: string;
+  name: string;
+  uid: string;
+  controller: boolean;
+  blockOwnerDeletion: boolean;
+  //[OwnerReference:]
 
 
-    //[end]
+  //[end]
 }
 
 export class Time {
-    //[Time:]
+  //[Time:]
 
 
-    //[end]
+  //[end]
 }
+
 export class ObjectMeta {
-    name: string;
-    generateName: string;
-    namespace: string;
-    selfLink: string;
-    uid: string;
-    resourceVersion: string;
-    generation: number;
-    creationTimestamp: Time;
-    deletionTimestamp: Time;
-    deletionGracePeriodSeconds: number;
-    labels: {};
-    annotations: {};
-    ownerReferences: OwnerReference[];
-    initializers: Initializers;
-    finalizers: string[];
-    clusterName: string;
-    //[ObjectMeta:]
+  name: string;
+  generateName: string;
+  namespace: string;
+  selfLink: string;
+  uid: string;
+  resourceVersion: string;
+  generation: number;
+  creationTimestamp: Time;
+  deletionTimestamp: Time;
+  deletionGracePeriodSeconds: number;
+  labels: {};
+  annotations: {};
+  ownerReferences: OwnerReference[];
+  initializers: Initializers;
+  finalizers: string[];
+  clusterName: string;
+  //[ObjectMeta:]
 
 
-    //[end]
+  //[end]
 }
+
 export class KubeService {
-    kind: string;
-    apiVersion: string;
-    metadata: ObjectMeta;
-    spec: ServiceSpec;
-    status: ServiceStatus;
-    //[Service:]
+  kind: string;
+  apiVersion: string;
+  metadata: ObjectMeta;
+  spec: ServiceSpec;
+  status: ServiceStatus;
+  //[Service:]
 
 
-    //[end]
+  //[end]
 }
