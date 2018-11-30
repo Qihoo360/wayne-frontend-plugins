@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Router} from '@angular/router';
-import {State} from '@clr/angular';
-import {ServiceTpl} from '../../../shared/model/servicetpl';
-import {Page} from '../../../../src/app/shared/page/page-state';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { State } from '@clr/angular';
+import { ServiceTpl } from '../../../shared/model/servicetpl';
+import { Page } from '../../../../src/app/shared/page/page-state';
 
 @Component({
   selector: 'list-servicetpl',
@@ -43,7 +43,7 @@ export class ListServiceTplComponent implements OnInit {
     this.delete.emit(serviceTpl);
   }
 
-  editServiceTpl(serviceTpl: ServiceTpl){
+  editServiceTpl(serviceTpl: ServiceTpl) {
     this.edit.emit(serviceTpl);
   }
 }
