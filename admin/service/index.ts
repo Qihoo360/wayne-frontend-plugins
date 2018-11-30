@@ -1,6 +1,6 @@
-import {ServiceComponent} from "./service.component";
-import {TrashServiceComponent} from "./trash-service/trash-service.component";
-import {ServiceModule} from "./service.module";
+import { ServiceComponent } from './service.component';
+import { TrashServiceComponent } from './trash-service/trash-service.component';
+import { ServiceModule } from './service.module';
 
 
 export const SERVICE_ADMIN_PATH = [

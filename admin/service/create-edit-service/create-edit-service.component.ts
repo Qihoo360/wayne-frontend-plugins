@@ -1,23 +1,23 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {NgForm} from '@angular/forms';
-import {ActionType} from '../../../../src/app/shared/shared.const';
-import {Service} from '../../../shared/model/service';
-import {App} from '../../../../src/app/shared/model/v1/app';
-import {ServiceService} from '../../../shared/client/v1/service.service';
-import {AppService} from '../../../../src/app/shared/client/v1/app.service';
-import {AceEditorBoxComponent} from '../../../../src/app/shared/ace-editor/ace-editor-box/ace-editor-box.component';
-import {AceEditorService} from '../../../../src/app/shared/ace-editor/ace-editor.service';
-import {AceEditorMsg} from '../../../../src/app/shared/ace-editor/ace-editor';
-import {MessageHandlerService} from "../../../../src/app/shared/message-handler/message-handler.service";
+import { NgForm } from '@angular/forms';
+import { ActionType } from '../../../../src/app/shared/shared.const';
+import { Service } from '../../../shared/model/service';
+import { App } from '../../../../src/app/shared/model/v1/app';
+import { ServiceService } from '../../../shared/client/v1/service.service';
+import { AppService } from '../../../../src/app/shared/client/v1/app.service';
+import { AceEditorBoxComponent } from '../../../../src/app/shared/ace-editor/ace-editor-box/ace-editor-box.component';
+import { AceEditorService } from '../../../../src/app/shared/ace-editor/ace-editor.service';
+import { AceEditorMsg } from '../../../../src/app/shared/ace-editor/ace-editor';
+import { MessageHandlerService } from '../../../../src/app/shared/message-handler/message-handler.service';
 
 @Component({
   selector: 'create-edit-service',
   templateUrl: 'create-edit-service.component.html',
   styleUrls: ['create-edit-service.scss']
 })
-export class CreateEditServiceComponent implements OnInit{
+export class CreateEditServiceComponent implements OnInit {
   @Output() create = new EventEmitter<boolean>();
   modalOpened: boolean;
 
@@ -62,7 +62,7 @@ export class CreateEditServiceComponent implements OnInit{
       this.title = '编辑服务';
       this.serviceService.getById(id, 0).subscribe(
         status => {
-          this.service = status.data
+          this.service = status.data;
           this.service.metaDataObj = JSON.parse(this.service.metaData ? this.service.metaData : '{}');
           this.initJsonEditor();
         },
@@ -142,7 +142,7 @@ export class CreateEditServiceComponent implements OnInit{
   handleValidation(): void {
     let cont = this.currentForm.controls['name'];
     if (cont) {
-      this.isNameValid = cont.valid
+      this.isNameValid = cont.valid;
     }
 
   }

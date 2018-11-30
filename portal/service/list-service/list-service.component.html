@@ -58,25 +58,30 @@
     <clr-dg-cell>{{serviceTpl.user}}</clr-dg-cell>
     <clr-dg-cell class="col-operate">
       <button class="wayne-button text"
-        (click)="publishServiceTpl(serviceTpl)"
-        *ngIf="authService.currentAppPermission.service.deploy || authService.currentUser.admin">
-        发布</button>
+              (click)="publishServiceTpl(serviceTpl)"
+              *ngIf="authService.currentAppPermission.service.deploy || authService.currentUser.admin">
+        发布
+      </button>
       <button class="wayne-button text"
-        (click)="detailServiceTpl(serviceTpl)"
-        *ngIf="authService.currentAppPermission.service.read || authService.currentUser.admin">
-        详情</button>
+              (click)="detailServiceTpl(serviceTpl)"
+              *ngIf="authService.currentAppPermission.service.read || authService.currentUser.admin">
+        详情
+      </button>
       <button class="wayne-button text"
-        (click)="cloneServiceTpl(serviceTpl)"
-        *ngIf="authService.currentAppPermission.service.create || authService.currentUser.admin">
-        克隆</button>
+              (click)="cloneServiceTpl(serviceTpl)"
+              *ngIf="authService.currentAppPermission.service.create || authService.currentUser.admin">
+        克隆
+      </button>
       <button class="wayne-button text"
-        *ngIf="!serviceTpl.status && (authService.currentAppPermission.service.delete || authService.currentUser.admin)"
-        (click)="deleteServiceTpl(serviceTpl)">
-        删除</button>
+              *ngIf="!serviceTpl.status && (authService.currentAppPermission.service.delete || authService.currentUser.admin)"
+              (click)="deleteServiceTpl(serviceTpl)">
+        删除
+      </button>
       <button class="wayne-button text"
-         (click)="offlineServiceTpl(serviceTpl)"
-         *ngIf="serviceTpl.status && (authService.currentAppPermission.service.offline || authService.currentUser.admin)">
-         下线</button>
+              (click)="offlineServiceTpl(serviceTpl)"
+              *ngIf="serviceTpl.status && (authService.currentAppPermission.service.offline || authService.currentUser.admin)">
+        下线
+      </button>
 
     </clr-dg-cell>
   </clr-dg-row>

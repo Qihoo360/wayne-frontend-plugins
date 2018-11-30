@@ -1,15 +1,15 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {State} from '@clr/angular';
-import {MessageHandlerService} from '../../../../src/app/shared/message-handler/message-handler.service';
-import {ConfirmationMessage} from '../../../../src/app/shared/confirmation-dialog/confirmation-message';
-import {ConfirmationButtons, ConfirmationState, ConfirmationTargets} from '../../../../src/app/shared/shared.const';
-import {ConfirmationDialogService} from '../../../../src/app/shared/confirmation-dialog/confirmation-dialog.service';
-import {Subscription} from 'rxjs/Subscription';
-import {ServiceTpl} from '../../../shared/model/servicetpl';
-import {ServiceTplService} from '../../../shared/client/v1/servicetpl.service';
-import {AceEditorService} from '../../../../src/app/shared/ace-editor/ace-editor.service';
-import {AceEditorMsg} from '../../../../src/app/shared/ace-editor/ace-editor';
-import {PageState} from '../../../../src/app/shared/page/page-state';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { State } from '@clr/angular';
+import { MessageHandlerService } from '../../../../src/app/shared/message-handler/message-handler.service';
+import { ConfirmationMessage } from '../../../../src/app/shared/confirmation-dialog/confirmation-message';
+import { ConfirmationButtons, ConfirmationState, ConfirmationTargets } from '../../../../src/app/shared/shared.const';
+import { ConfirmationDialogService } from '../../../../src/app/shared/confirmation-dialog/confirmation-dialog.service';
+import { Subscription } from 'rxjs/Subscription';
+import { ServiceTpl } from '../../../shared/model/servicetpl';
+import { ServiceTplService } from '../../../shared/client/v1/servicetpl.service';
+import { AceEditorService } from '../../../../src/app/shared/ace-editor/ace-editor.service';
+import { AceEditorMsg } from '../../../../src/app/shared/ace-editor/ace-editor';
+import { PageState } from '../../../../src/app/shared/page/page-state';
 
 @Component({
   selector: 'trash-servicetpl',
@@ -93,7 +93,7 @@ export class TrashServiceTplComponent implements OnInit, OnDestroy {
     this.deletionDialogService.openComfirmDialog(deletionMessage);
   }
 
-  tplDetail(serviceTpl: ServiceTpl){
+  tplDetail(serviceTpl: ServiceTpl) {
     this.aceEditorService.announceMessage(AceEditorMsg.Instance(serviceTpl.template, false, '详情'));
   }
 

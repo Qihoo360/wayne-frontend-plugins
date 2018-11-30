@@ -1,15 +1,15 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {State} from '@clr/angular';
-import {MessageHandlerService} from '../../../../src/app/shared/message-handler/message-handler.service';
-import {ConfirmationMessage} from '../../../../src/app/shared/confirmation-dialog/confirmation-message';
-import {ConfirmationButtons, ConfirmationState, ConfirmationTargets} from '../../../../src/app/shared/shared.const';
-import {ConfirmationDialogService} from '../../../../src/app/shared/confirmation-dialog/confirmation-dialog.service';
-import {Subscription} from 'rxjs/Subscription';
-import {Service} from '../../../shared/model/service';
-import {ServiceService} from '../../../shared/client/v1/service.service';
-import {PageState} from '../../../../src/app/shared/page/page-state';
-import {AceEditorService} from '../../../../src/app/shared/ace-editor/ace-editor.service';
-import {AceEditorMsg} from '../../../../src/app/shared/ace-editor/ace-editor';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { State } from '@clr/angular';
+import { MessageHandlerService } from '../../../../src/app/shared/message-handler/message-handler.service';
+import { ConfirmationMessage } from '../../../../src/app/shared/confirmation-dialog/confirmation-message';
+import { ConfirmationButtons, ConfirmationState, ConfirmationTargets } from '../../../../src/app/shared/shared.const';
+import { ConfirmationDialogService } from '../../../../src/app/shared/confirmation-dialog/confirmation-dialog.service';
+import { Subscription } from 'rxjs/Subscription';
+import { Service } from '../../../shared/model/service';
+import { ServiceService } from '../../../shared/client/v1/service.service';
+import { PageState } from '../../../../src/app/shared/page/page-state';
+import { AceEditorService } from '../../../../src/app/shared/ace-editor/ace-editor.service';
+import { AceEditorMsg } from '../../../../src/app/shared/ace-editor/ace-editor';
 
 @Component({
   selector: 'trash-service',

@@ -1,6 +1,6 @@
-import {AfterContentInit, Component, ViewChild, ElementRef, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {State} from '@clr/angular';
+import { AfterContentInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { State } from '@clr/angular';
 import {
   ConfirmationButtons,
   ConfirmationState,
@@ -10,32 +10,32 @@ import {
   syncStatusInterval,
   TemplateState
 } from '../../../src/app/shared/shared.const';
-import {MessageHandlerService} from '../../../src/app/shared/message-handler/message-handler.service';
-import {ListServiceComponent} from './list-service/list-service.component';
-import {CreateEditServiceComponent} from './create-edit-service/create-edit-service.component';
-import {Observable} from "rxjs/Observable";
-import {AppService} from "../../../src/app/shared/client/v1/app.service";
-import {App} from "../../../src/app/shared/model/v1/app";
-import {CacheService} from "../../../src/app/shared/auth/cache.service";
-import {ClusterService} from "../../../src/app/shared/client/v1/cluster.service";
-import {Cluster} from "../../../src/app/shared/model/v1/cluster";
-import {AuthService} from '../../../src/app/shared/auth/auth.service';
-import {PublishService} from "../../../src/app/shared/client/v1/publish.service";
-import {PublishStatus} from "../../../src/app/shared/model/v1/publish-status";
-import {ConfirmationMessage} from "../../../src/app/shared/confirmation-dialog/confirmation-message";
-import {ConfirmationDialogService} from "../../../src/app/shared/confirmation-dialog/confirmation-dialog.service";
-import {Subscription} from "rxjs/Subscription";
-import {isArrayNotEmpty, isNotEmpty} from "../../../src/app/shared/utils";
-import {PageState} from '../../../src/app/shared/page/page-state';
-import {TabDragService} from '../../../src/app/shared/client/v1/tab-drag.service';
-import {OrderItem} from '../../../src/app/shared/model/v1/order';
-import {Service} from "../../shared/model/service";
-import {ServiceTpl} from "../../shared/model/servicetpl";
-import {ServiceClient} from "../../shared/client/v1/kubernetes/service";
-import {ServiceService} from "../../shared/client/v1/service.service";
-import {PublishHistoryService} from "../../../src/app/portal/common/publish-history/publish-history.service";
-import {ServiceTplService} from "../../shared/client/v1/servicetpl.service";
-import {KubeService} from "../../shared/model/kubernetes/service";
+import { MessageHandlerService } from '../../../src/app/shared/message-handler/message-handler.service';
+import { ListServiceComponent } from './list-service/list-service.component';
+import { CreateEditServiceComponent } from './create-edit-service/create-edit-service.component';
+import { Observable } from 'rxjs/Observable';
+import { AppService } from '../../../src/app/shared/client/v1/app.service';
+import { App } from '../../../src/app/shared/model/v1/app';
+import { CacheService } from '../../../src/app/shared/auth/cache.service';
+import { ClusterService } from '../../../src/app/shared/client/v1/cluster.service';
+import { Cluster } from '../../../src/app/shared/model/v1/cluster';
+import { AuthService } from '../../../src/app/shared/auth/auth.service';
+import { PublishService } from '../../../src/app/shared/client/v1/publish.service';
+import { PublishStatus } from '../../../src/app/shared/model/v1/publish-status';
+import { ConfirmationMessage } from '../../../src/app/shared/confirmation-dialog/confirmation-message';
+import { ConfirmationDialogService } from '../../../src/app/shared/confirmation-dialog/confirmation-dialog.service';
+import { Subscription } from 'rxjs/Subscription';
+import { isArrayNotEmpty, isNotEmpty } from '../../../src/app/shared/utils';
+import { PageState } from '../../../src/app/shared/page/page-state';
+import { TabDragService } from '../../../src/app/shared/client/v1/tab-drag.service';
+import { OrderItem } from '../../../src/app/shared/model/v1/order';
+import { Service } from '../../shared/model/service';
+import { ServiceTpl } from '../../shared/model/servicetpl';
+import { ServiceClient } from '../../shared/client/v1/kubernetes/service';
+import { ServiceService } from '../../shared/client/v1/service.service';
+import { PublishHistoryService } from '../../../src/app/portal/common/publish-history/publish-history.service';
+import { ServiceTplService } from '../../shared/client/v1/servicetpl.service';
+import { KubeService } from '../../shared/model/kubernetes/service';
 
 const showState = {
   'create_time': {hidden: false},
@@ -89,9 +89,9 @@ export class ServiceComponent implements AfterContentInit {
               private el: ElementRef,
               private serviceTplService: ServiceTplService,
               private messageHandlerService: MessageHandlerService) {
-                this.tabScription = this.tabDragService.tabDragOverObservable.subscribe(over => {
-                  if (over) this.tabChange();
-                })
+    this.tabScription = this.tabDragService.tabDragOverObservable.subscribe(over => {
+      if (over) this.tabChange();
+    });
     this.subscription = deletionDialogService.confirmationConfirm$.subscribe(message => {
       if (message &&
         message.state === ConfirmationState.CONFIRMED &&
@@ -112,7 +112,7 @@ export class ServiceComponent implements AfterContentInit {
     });
     this.periodSyncStatus();
   }
-  
+
   ngOnInit() {
     this.initShow();
   }
@@ -121,7 +121,7 @@ export class ServiceComponent implements AfterContentInit {
     this.showList = [];
     Object.keys(this.showState).forEach(key => {
       if (!this.showState[key].hidden) this.showList.push(key);
-    })
+    });
   }
 
   confirmEvent() {
@@ -131,7 +131,7 @@ export class ServiceComponent implements AfterContentInit {
       } else {
         this.showState[key] = {hidden: true};
       }
-    })
+    });
   }
 
   cancelEvent() {
@@ -143,7 +143,7 @@ export class ServiceComponent implements AfterContentInit {
       return {
         id: parseInt(item.id),
         order: index
-      }
+      };
     });
     if (this.orderCache && JSON.stringify(this.orderCache) === JSON.stringify(orderList)) return;
     this.serviceService.updateOrder(this.appId, orderList).subscribe(
@@ -165,21 +165,21 @@ export class ServiceComponent implements AfterContentInit {
         return {
           id: item.id,
           order: item.order
-        }
-      })
+        };
+      });
     } else {
       this.orderCache = [].slice.call(this.el.nativeElement.querySelectorAll('.tabs-item')).map((item, index) => {
         return {
           id: parseInt(item.id),
           order: index
-        }
-      })
+        };
+      });
     }
   }
 
   periodSyncStatus() {
     this.timer = setInterval(() => {
-      this.syncStatus()
+      this.syncStatus();
     }, syncStatusInterval);
   }
 
@@ -196,7 +196,7 @@ export class ServiceComponent implements AfterContentInit {
                 let code = response.statusCode | response.status;
                 if (code === httpStatusCode.NoContent) {
                   this.serviceTpls[i].status[j].state = TemplateState.NOT_FOUND;
-                  return
+                  return;
                 }
                 if (response.data &&
                   this.serviceTpls &&
@@ -213,13 +213,13 @@ export class ServiceComponent implements AfterContentInit {
                   this.serviceTpls[i] &&
                   this.serviceTpls[i].status &&
                   this.serviceTpls[i].status[j]) {
-                    this.serviceTpls[i].status[j].errNum += 1;
-                    this.messageHandlerService.showError(`${status.cluster}请求错误次数 ${this.serviceTpls[i].status[j].errNum} 次`);
-                    if (this.serviceTpls[i].status[j].errNum === 3) {
-                      this.messageHandlerService.showError(`${status.cluster}的错误请求已经停止，请联系管理员解决`);
-                    }
+                  this.serviceTpls[i].status[j].errNum += 1;
+                  this.messageHandlerService.showError(`${status.cluster}请求错误次数 ${this.serviceTpls[i].status[j].errNum} 次`);
+                  if (this.serviceTpls[i].status[j].errNum === 3) {
+                    this.messageHandlerService.showError(`${status.cluster}的错误请求已经停止，请联系管理员解决`);
                   }
-                console.log(error)
+                }
+                console.log(error);
               }
             );
           }
@@ -282,12 +282,12 @@ export class ServiceComponent implements AfterContentInit {
       }
       for (let svc of this.services) {
         if (serviceId == svc.id) {
-          return serviceId
+          return serviceId;
         }
       }
       return this.services[0].id;
     } else {
-      return null
+      return null;
     }
   }
 
@@ -314,7 +314,7 @@ export class ServiceComponent implements AfterContentInit {
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.timer)
+    clearInterval(this.timer);
     this.subscription.unsubscribe();
     this.tabScription.unsubscribe();
   }
@@ -325,7 +325,7 @@ export class ServiceComponent implements AfterContentInit {
 
   retrieve(state?: State): void {
     if (!this.serviceId) {
-      return
+      return;
     }
     if (state) {
       this.pageState = PageState.fromState(state, {totalPage: this.pageState.page.totalPage, totalCount: this.pageState.page.totalCount});
@@ -370,7 +370,7 @@ export class ServiceComponent implements AfterContentInit {
           for (let port of  service.spec.ports) {
             ports.push(`${port.port}:${port.targetPort}/${port.protocol}`);
           }
-          tpls[i].ports = ports.join(", ");
+          tpls[i].ports = ports.join(', ');
 
           let publishStatus = this.tplStatusMap[tpls[i].id];
           if (publishStatus && publishStatus.length > 0) {
@@ -379,12 +379,12 @@ export class ServiceComponent implements AfterContentInit {
         }
       }
     }
-    return tpls
+    return tpls;
   }
 
   deleteService() {
     if (this.publishStatus && this.publishStatus.length > 0) {
-      this.messageHandlerService.warning("已上线负载均衡无法删除，请先下线负载均衡！")
+      this.messageHandlerService.warning('已上线负载均衡无法删除，请先下线负载均衡！');
     } else {
       let deletionMessage = new ConfirmationMessage(
         '删除负载均衡确认',
@@ -400,7 +400,7 @@ export class ServiceComponent implements AfterContentInit {
   createService(id: number) {
     if (id) {
       this.serviceId = null;
-      this.initService(true)
+      this.initService(true);
     }
   }
 
@@ -417,7 +417,7 @@ export class ServiceComponent implements AfterContentInit {
   filterCluster(): Cluster[] {
     return this.clusters.filter((clusterObj: Cluster) => {
       return this.cacheService.namespace.metaDataObj.clusterMeta &&
-        this.cacheService.namespace.metaDataObj.clusterMeta[clusterObj.name]
+        this.cacheService.namespace.metaDataObj.clusterMeta[clusterObj.name];
     });
   }
 

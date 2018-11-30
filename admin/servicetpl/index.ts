@@ -1,6 +1,6 @@
-import {ServiceTplComponent} from "./servicetpl.component";
-import {TrashServiceTplComponent} from "./trash-servicetpl/trash-servicetpl.component";
-import {ServiceTplModule} from "./servicetpl.module";
+import { ServiceTplComponent } from './servicetpl.component';
+import { TrashServiceTplComponent } from './trash-servicetpl/trash-servicetpl.component';
+import { ServiceTplModule } from './servicetpl.module';
 
 
 export const SERVICE_SERVICETPL_ADMIN_PATH = [

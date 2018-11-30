@@ -1,29 +1,29 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {State} from '@clr/angular';
-import {ConfirmationMessage} from "../../../../src/app/shared/confirmation-dialog/confirmation-message";
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { State } from '@clr/angular';
+import { ConfirmationMessage } from '../../../../src/app/shared/confirmation-dialog/confirmation-message';
 import {
   ConfirmationButtons,
   ConfirmationState,
   ConfirmationTargets,
   ResourcesActionType,
   TemplateState
-} from "../../../../src/app/shared/shared.const";
-import {ConfirmationDialogService} from "../../../../src/app/shared/confirmation-dialog/confirmation-dialog.service";
-import {Subscription} from "rxjs/Subscription";
-import {MessageHandlerService} from "../../../../src/app/shared/message-handler/message-handler.service";
-import {PublishServiceTplComponent} from "../publish-tpl/publish-tpl.component";
-import {ServiceStatusComponent} from "../status/status.component";
-import {AuthService} from '../../../../src/app/shared/auth/auth.service';
-import {PublishStatus} from "../../../../src/app/shared/model/v1/publish-status";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Page} from '../../../../src/app/shared/page/page-state';
-import {AceEditorMsg} from "../../../../src/app/shared/ace-editor/ace-editor";
-import {AceEditorService} from "../../../../src/app/shared/ace-editor/ace-editor.service";
-import {Service} from "../../../shared/model/service";
-import {ServiceTpl} from "../../../shared/model/servicetpl";
-import {ServiceTplService} from "../../../shared/client/v1/servicetpl.service";
-import {ServiceService} from "../../../shared/client/v1/service.service";
-import {TplDetailService} from "../../../../src/app/portal/common/tpl-detail/tpl-detail.service";
+} from '../../../../src/app/shared/shared.const';
+import { ConfirmationDialogService } from '../../../../src/app/shared/confirmation-dialog/confirmation-dialog.service';
+import { Subscription } from 'rxjs/Subscription';
+import { MessageHandlerService } from '../../../../src/app/shared/message-handler/message-handler.service';
+import { PublishServiceTplComponent } from '../publish-tpl/publish-tpl.component';
+import { ServiceStatusComponent } from '../status/status.component';
+import { AuthService } from '../../../../src/app/shared/auth/auth.service';
+import { PublishStatus } from '../../../../src/app/shared/model/v1/publish-status';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Page } from '../../../../src/app/shared/page/page-state';
+import { AceEditorMsg } from '../../../../src/app/shared/ace-editor/ace-editor';
+import { AceEditorService } from '../../../../src/app/shared/ace-editor/ace-editor.service';
+import { Service } from '../../../shared/model/service';
+import { ServiceTpl } from '../../../shared/model/servicetpl';
+import { ServiceTplService } from '../../../shared/client/v1/servicetpl.service';
+import { ServiceService } from '../../../shared/client/v1/service.service';
+import { TplDetailService } from '../../../../src/app/portal/common/tpl-detail/tpl-detail.service';
 
 @Component({
   selector: 'list-service',
@@ -109,7 +109,7 @@ export class ListServiceComponent implements OnInit, OnDestroy {
     this.serviceService.getById(tpl.serviceId, this.appId).subscribe(
       response => {
         let service = response.data;
-        this.publishTpl.newPublishTpl(service, tpl, ResourcesActionType.PUBLISH)
+        this.publishTpl.newPublishTpl(service, tpl, ResourcesActionType.PUBLISH);
       },
       error => {
         this.messageHandlerService.handleError(error);
@@ -120,7 +120,7 @@ export class ListServiceComponent implements OnInit, OnDestroy {
 
   serviceState(status: PublishStatus, tpl: ServiceTpl) {
     if (status.cluster && status.state != TemplateState.NOT_FOUND) {
-      this.serviceStatus.newServiceStatus(status.cluster, tpl)
+      this.serviceStatus.newServiceStatus(status.cluster, tpl);
     }
 
   }

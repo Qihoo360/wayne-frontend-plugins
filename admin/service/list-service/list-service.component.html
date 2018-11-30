@@ -35,13 +35,15 @@
     </ng-container>
   </clr-dg-column>
   <clr-dg-row *ngFor="let service of services" [clrDgItem]="service">
-    <clr-dg-action-overflow >
-      <button class="action-item" (click)="editService(service)" >编辑</button>
+    <clr-dg-action-overflow>
+      <button class="action-item" (click)="editService(service)">编辑</button>
       <button class="action-item" (click)="deleteService(service)">删除</button>
     </clr-dg-action-overflow>
     <clr-dg-cell class="col-query-id">{{service.id}}</clr-dg-cell>
-    <clr-dg-cell class="col-app-name copy"><a href="javascript:void(0)" (click)="goToLink(service, 'tpl')">{{service.name}}</a></clr-dg-cell>
-    <clr-dg-cell class="col-namespace"><a href="javascript:void(0)" (click)="goToLink(service, 'app')">{{service.app.name}}</a></clr-dg-cell>
+    <clr-dg-cell class="col-app-name copy"><a href="javascript:void(0)"
+                                              (click)="goToLink(service, 'tpl')">{{service.name}}</a></clr-dg-cell>
+    <clr-dg-cell class="col-namespace"><a href="javascript:void(0)"
+                                          (click)="goToLink(service, 'app')">{{service.app.name}}</a></clr-dg-cell>
     <clr-dg-cell class="col-metadata">
       <div class="text-overflow">
         <a href="javascript:;" (click)="detailMetaDataTpl(service.metaData)">{{service.metaData}}</a>

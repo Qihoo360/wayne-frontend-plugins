@@ -1,16 +1,16 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {NgForm} from "@angular/forms";
-import {MessageHandlerService} from "../../../../src/app/shared/message-handler/message-handler.service";
-import {ActionType, configKeyApiNameGenerateRule} from "../../../../src/app/shared/shared.const";
-import {App} from "../../../../src/app/shared/model/v1/app";
-import {Cluster} from "../../../../src/app/shared/model/v1/cluster";
-import {AuthService} from "../../../../src/app/shared/auth/auth.service";
-import {ApiNameGenerateRule} from "../../../../src/app/shared/utils";
-import {Service} from "../../../shared/model/service";
-import {ServiceService} from "../../../shared/client/v1/service.service";
+import { NgForm } from '@angular/forms';
+import { MessageHandlerService } from '../../../../src/app/shared/message-handler/message-handler.service';
+import { ActionType, configKeyApiNameGenerateRule } from '../../../../src/app/shared/shared.const';
+import { App } from '../../../../src/app/shared/model/v1/app';
+import { Cluster } from '../../../../src/app/shared/model/v1/cluster';
+import { AuthService } from '../../../../src/app/shared/auth/auth.service';
+import { ApiNameGenerateRule } from '../../../../src/app/shared/utils';
+import { Service } from '../../../shared/model/service';
+import { ServiceService } from '../../../shared/client/v1/service.service';
 
 @Component({
   selector: 'create-edit-service',
@@ -55,20 +55,20 @@ export class CreateEditServiceComponent implements OnInit {
     }
     if (id) {
       this.actionType = ActionType.EDIT;
-      this.title = "编辑负载均衡";
+      this.title = '编辑负载均衡';
       this.serviceService.getById(id, this.app.id).subscribe(
         status => {
           let data = status.data;
           this.service = data;
           if (!data.metaData) {
-            data.metaData = "{}";
+            data.metaData = '{}';
           }
           let metaData = JSON.parse(data.metaData);
-          if (metaData["clusters"]) {
-            for (let cluster of metaData["clusters"]) {
+          if (metaData['clusters']) {
+            for (let cluster of metaData['clusters']) {
               for (let i = 0; i < this.clusters.length; i++) {
                 if (cluster == this.clusters[i].name) {
-                  this.clusters[i].checked = true
+                  this.clusters[i].checked = true;
                 }
               }
             }
@@ -80,7 +80,7 @@ export class CreateEditServiceComponent implements OnInit {
         });
     } else {
       this.actionType = ActionType.ADD_NEW;
-      this.title = "创建负载均衡";
+      this.title = '创建负载均衡';
       this.service = new Service();
     }
   }
@@ -90,9 +90,9 @@ export class CreateEditServiceComponent implements OnInit {
     this.currentForm.reset();
   }
 
-  get nameGenerateRuleConfig():string{
+  get nameGenerateRuleConfig(): string {
     return ApiNameGenerateRule.config(
-      this.authService.config[configKeyApiNameGenerateRule], this.app.metaData)
+      this.authService.config[configKeyApiNameGenerateRule], this.app.metaData);
   }
 
   onSubmit() {
@@ -102,16 +102,16 @@ export class CreateEditServiceComponent implements OnInit {
     this.isSubmitOnGoing = true;
     this.service.appId = this.app.id;
     if (!this.service.metaData) {
-      this.service.metaData = "{}";
+      this.service.metaData = '{}';
     }
     let metaData = JSON.parse(this.service.metaData);
     let checkedCluster = Array<string>();
     this.clusters.map(cluster => {
       if (cluster.checked) {
-        checkedCluster.push(cluster.name)
+        checkedCluster.push(cluster.name);
       }
     });
-    metaData["clusters"] = checkedCluster;
+    metaData['clusters'] = checkedCluster;
     this.service.metaData = JSON.stringify(metaData);
     switch (this.actionType) {
       case ActionType.ADD_NEW:
@@ -162,9 +162,9 @@ export class CreateEditServiceComponent implements OnInit {
 
   //Handle the form validation
   handleValidation(): void {
-    let cont = this.currentForm.controls["name"];
+    let cont = this.currentForm.controls['name'];
     if (cont) {
-      this.isNameValid = cont.valid
+      this.isNameValid = cont.valid;
     }
 
   }
