@@ -1,25 +1,25 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Location} from '@angular/common';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {NgForm} from "@angular/forms";
-import {MessageHandlerService} from "../../../../src/app/shared/message-handler/message-handler.service";
-import {ActionType, appLabelKey, namespaceLabelKey} from "../../../../src/app/shared/shared.const";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Observable} from "rxjs/Observable";
-import {App} from "../../../../src/app/shared/model/v1/app";
-import {AppService} from "../../../../src/app/shared/client/v1/app.service";
-import {CacheService} from "../../../../src/app/shared/auth/cache.service";
-import {AceEditorService} from "../../../../src/app/shared/ace-editor/ace-editor.service";
-import {AceEditorMsg} from "../../../../src/app/shared/ace-editor/ace-editor";
-import {defaultService} from "../../../../src/app/shared/default-models/service.const";
-import {mergeDeep} from "../../../../src/app/shared/utils";
-import {Service} from "../../../shared/model/service";
-import {ServiceTpl} from "../../../shared/model/servicetpl";
-import {KubeService, ServicePort} from "../../../shared/model/kubernetes/service";
-import {ServiceTplService} from "../../../shared/client/v1/servicetpl.service";
-import {ServiceService} from "../../../shared/client/v1/service.service";
-import {AuthService} from "../../../../src/app/shared/auth/auth.service";
+import { NgForm } from '@angular/forms';
+import { MessageHandlerService } from '../../../../src/app/shared/message-handler/message-handler.service';
+import { ActionType, appLabelKey, namespaceLabelKey } from '../../../../src/app/shared/shared.const';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { App } from '../../../../src/app/shared/model/v1/app';
+import { AppService } from '../../../../src/app/shared/client/v1/app.service';
+import { CacheService } from '../../../../src/app/shared/auth/cache.service';
+import { AceEditorService } from '../../../../src/app/shared/ace-editor/ace-editor.service';
+import { AceEditorMsg } from '../../../../src/app/shared/ace-editor/ace-editor';
+import { defaultService } from '../../../../src/app/shared/default-models/service.const';
+import { mergeDeep } from '../../../../src/app/shared/utils';
+import { Service } from '../../../shared/model/service';
+import { ServiceTpl } from '../../../shared/model/servicetpl';
+import { KubeService, ServicePort } from '../../../shared/model/kubernetes/service';
+import { ServiceTplService } from '../../../shared/client/v1/servicetpl.service';
+import { ServiceService } from '../../../shared/client/v1/service.service';
+import { AuthService } from '../../../../src/app/shared/auth/auth.service';
 
 @Component({
   selector: 'create-edit-servicetpl',
@@ -57,7 +57,7 @@ export class CreateEditServiceTplComponent implements OnInit {
 
 
   get appLabelKey(): string {
-    return this.authService.config[appLabelKey]
+    return this.authService.config[appLabelKey];
   }
 
   initDefault() {
@@ -74,7 +74,7 @@ export class CreateEditServiceTplComponent implements OnInit {
   }
 
   onAddSelector() {
-    this.labelSelector.push({"key": "", "value": ""});
+    this.labelSelector.push({'key': '', 'value': ''});
   }
 
   onDeleteSelector(index: number) {
@@ -85,14 +85,14 @@ export class CreateEditServiceTplComponent implements OnInit {
     if (this.kubeService.spec.selector) {
       this.labelSelector = [];
       Object.getOwnPropertyNames(this.kubeService.spec.selector).map(key => {
-        this.labelSelector.push({"key": key, "value": this.kubeService.spec.selector[key]});
+        this.labelSelector.push({'key': key, 'value': this.kubeService.spec.selector[key]});
       });
     }
   }
 
   defaultPort(): ServicePort {
     let port = new ServicePort();
-    port.protocol = "TCP";
+    port.protocol = 'TCP';
     return port;
   }
 
@@ -122,7 +122,7 @@ export class CreateEditServiceTplComponent implements OnInit {
           this.serviceTpl.description = null;
           this.saveServiceTpl(JSON.parse(this.serviceTpl.template));
         } else {
-          this.labelSelector.push({"key": "app", "value": this.app.name});
+          this.labelSelector.push({'key': 'app', 'value': this.app.name});
         }
       },
       error => {
@@ -177,7 +177,7 @@ export class CreateEditServiceTplComponent implements OnInit {
     }
     labels[this.authService.config[appLabelKey]] = this.app.name;
     labels[this.authService.config[namespaceLabelKey]] = this.cacheService.currentNamespace.name;
-    labels["app"] = this.service.name;
+    labels['app'] = this.service.name;
     return labels;
   }
 
@@ -189,13 +189,13 @@ export class CreateEditServiceTplComponent implements OnInit {
       }
     }
     if (this.headless) {
-      kubeService.spec.clusterIP = "None";
+      kubeService.spec.clusterIP = 'None';
     } else {
       kubeService.spec.clusterIP = undefined;
     }
     if (kubeService.spec.ports && kubeService.spec.ports.length > 0) {
       for (let i = 0; i < kubeService.spec.ports.length; i++) {
-        kubeService.spec.ports[i].name = this.service.name + "-" + kubeService.spec.ports[i].port;
+        kubeService.spec.ports[i].name = this.service.name + '-' + kubeService.spec.ports[i].port;
       }
     }
 
@@ -218,7 +218,7 @@ export class CreateEditServiceTplComponent implements OnInit {
 
   fillDefault(kubeService: KubeService) {
     this.kubeService = mergeDeep(JSON.parse(defaultService), kubeService);
-    if (this.kubeService.spec.clusterIP === "None") {
+    if (this.kubeService.spec.clusterIP === 'None') {
       this.headless = true;
     }
     this.parseLabelSelectors();
