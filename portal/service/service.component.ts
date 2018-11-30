@@ -38,7 +38,7 @@ import {ServiceTplService} from "../../shared/client/v1/servicetpl.service";
 import {KubeService} from "../../shared/model/kubernetes/service";
 
 const showState = {
-  '创建时间': {hidden: false},
+  'create_time': {hidden: false},
   '端口号': {hidden: false},
   '上线机房': {hidden: false},
   '发布说明': {hidden: false},
