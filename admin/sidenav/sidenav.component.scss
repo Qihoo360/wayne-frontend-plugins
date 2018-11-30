@@ -7,14 +7,17 @@
   &.has-nav-groups.has-icons.is-collapsed {
     width: 2.3rem;
   }
+
   ::ng-deep {
     .nav-content {
       &::-webkit-scrollbar {
         width: $scroll-bar-width;
       }
+
       &::-webkit-scrollbar-track {
         background: $scrollbar-bg;
       }
+
       &::-webkit-scrollbar-thumb {
         border-radius: ($scroll-bar-width + $scroll-margin-width) / 2;
         width: $scroll-bar-width;

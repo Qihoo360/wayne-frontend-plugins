@@ -5,10 +5,14 @@
     </div>
     <div class="row flex-items-xs-between" style="height:32px;">
       <div class="option-left">
-        <button class="btn btn-link" (click)="openModal()"><clr-icon shape="add"></clr-icon>创建服务模版</button>
+        <button class="btn btn-link" (click)="openModal()">
+          <clr-icon shape="add"></clr-icon>
+          创建服务模版
+        </button>
         <create-edit-servicetpl (create)="createServiceTpl($event)"></create-edit-servicetpl>
       </div>
     </div>
-    <list-servicetpl [serviceTpls]="serviceTpls" (delete)="deleteServiceTpl($event)" (edit)="editServiceTpl($event)" (paginate)="retrieve($event)" [page]="pageState.page"></list-servicetpl>
+    <list-servicetpl [serviceTpls]="serviceTpls" (delete)="deleteServiceTpl($event)" (edit)="editServiceTpl($event)"
+                     (paginate)="retrieve($event)" [page]="pageState.page"></list-servicetpl>
   </div>
 </div>

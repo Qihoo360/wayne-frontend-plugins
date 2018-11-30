@@ -1,4 +1,5 @@
-<button (click)="openModal()" class="wayne-button primary" *ngIf="authService.currentAppPermission.service.create || authService.currentUser.admin">
+<button (click)="openModal()" class="wayne-button primary"
+        *ngIf="authService.currentAppPermission.service.create || authService.currentUser.admin">
   创建负载均衡
 </button>
 
@@ -6,11 +7,11 @@
 <div *ngIf="serviceId && services?.length>0">
   <wayne-tabs>
     <wayne-tab (click)="tabClick(service.id)"
-                [id]="service.id"
-                *ngFor="let service of services"
-                [active]="service.id==serviceId"
-                [description]="service.description"
-                >
+               [id]="service.id"
+               *ngFor="let service of services"
+               [active]="service.id==serviceId"
+               [description]="service.description"
+    >
       {{service.name}}
     </wayne-tab>
   </wayne-tabs>
@@ -28,7 +29,8 @@
               *ngIf="authService.currentAppPermission.service.read || authService.currentUser.admin">
         发布历史
       </button>
-      <button (click)="deleteService()" class="wayne-button normal" *ngIf="authService.currentAppPermission.service.offline || authService.currentUser.admin">
+      <button (click)="deleteService()" class="wayne-button normal"
+              *ngIf="authService.currentAppPermission.service.offline || authService.currentUser.admin">
         删除负载均衡
       </button>
       <wayne-filter-box (confirm)="confirmEvent()" (cancel)="cancelEvent()">

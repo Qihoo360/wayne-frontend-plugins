@@ -1,6 +1,6 @@
-import {NgModule} from "@angular/core";
-import {SharedModule} from "../../src/app/shared/shared.module";
-import {SERVICE_PORTAL_MODULE} from "./service/index";
+import { NgModule } from '@angular/core';
+import { SharedModule } from '../../src/app/shared/shared.module';
+import { SERVICE_PORTAL_MODULE } from './service/index';
 
 @NgModule({
   imports: [

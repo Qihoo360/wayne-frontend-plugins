@@ -1,6 +1,6 @@
-import {ServiceComponent} from './service.component';
-import {CreateEditServiceTplComponent} from './create-edit-servicetpl/create-edit-servicetpl.component';
-import {ServiceModule} from './service.module';
+import { ServiceComponent } from './service.component';
+import { CreateEditServiceTplComponent } from './create-edit-servicetpl/create-edit-servicetpl.component';
+import { ServiceModule } from './service.module';
 
 export const SERVICE_PORTAL_PATH = [
   {path: 'service', component: ServiceComponent},

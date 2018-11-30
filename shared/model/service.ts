@@ -1,4 +1,4 @@
-import {App} from '../../../src/app/shared/model/v1/app';
+import { App } from '../../../src/app/shared/model/v1/app';
 
 export class Service {
   id: number;
