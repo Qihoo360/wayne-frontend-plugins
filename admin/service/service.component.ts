@@ -1,17 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {BreadcrumbService} from '../../../src/app/shared/client/v1/breadcrumb.service';
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import {State} from '@clr/angular';
-import {ConfirmationDialogService} from '../../../src/app/shared/confirmation-dialog/confirmation-dialog.service';
-import {ConfirmationMessage} from '../../../src/app/shared/confirmation-dialog/confirmation-message';
-import {ConfirmationButtons, ConfirmationState, ConfirmationTargets} from '../../../src/app/shared/shared.const';
-import {Subscription} from 'rxjs/Subscription';
-import {MessageHandlerService} from '../../../src/app/shared/message-handler/message-handler.service';
-import {ListServiceComponent} from './list-service/list-service.component';
-import {CreateEditServiceComponent} from './create-edit-service/create-edit-service.component';
-import {Service} from '../../shared/model/service';
-import {ServiceService} from '../../shared/client/v1/service.service';
-import {PageState} from '../../../src/app/shared/page/page-state';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BreadcrumbService } from '../../../src/app/shared/client/v1/breadcrumb.service';
+import { ActivatedRoute } from '@angular/router';
+import { State } from '@clr/angular';
+import { ConfirmationDialogService } from '../../../src/app/shared/confirmation-dialog/confirmation-dialog.service';
+import { ConfirmationMessage } from '../../../src/app/shared/confirmation-dialog/confirmation-message';
+import { ConfirmationButtons, ConfirmationState, ConfirmationTargets } from '../../../src/app/shared/shared.const';
+import { Subscription } from 'rxjs/Subscription';
+import { MessageHandlerService } from '../../../src/app/shared/message-handler/message-handler.service';
+import { ListServiceComponent } from './list-service/list-service.component';
+import { CreateEditServiceComponent } from './create-edit-service/create-edit-service.component';
+import { Service } from '../../shared/model/service';
+import { ServiceService } from '../../shared/client/v1/service.service';
+import { PageState } from '../../../src/app/shared/page/page-state';
 
 @Component({
   selector: 'wayne-service',
@@ -61,10 +61,10 @@ export class ServiceComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.appId = params['aid'];
-      if (typeof(this.appId) == 'undefined') {
-          this.appId = ''
+      if (typeof (this.appId) == 'undefined') {
+        this.appId = '';
       }
-    })
+    });
   }
 
   ngOnDestroy(): void {
@@ -91,7 +91,7 @@ export class ServiceComponent implements OnInit {
 
   createService(created: boolean) {
     if (created) {
-      this.retrieve()
+      this.retrieve();
     }
   }
 

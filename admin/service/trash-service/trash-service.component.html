@@ -36,7 +36,7 @@
       </clr-dg-column>
       <clr-dg-row *ngFor="let service of services" [clrDgItem]="service">
         <clr-dg-action-overflow>
-          <button class="action-item" (click)="recoverService(service)" >恢复</button>
+          <button class="action-item" (click)="recoverService(service)">恢复</button>
           <button class="action-item" (click)="deleteService(service)">彻底删除</button>
         </clr-dg-action-overflow>
         <clr-dg-cell class="col-query-id">{{service.id}}</clr-dg-cell>

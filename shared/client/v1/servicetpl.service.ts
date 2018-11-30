@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
-import {ServiceTpl} from '../../model/servicetpl';
-import {isNotEmpty} from '../../../../src/app/shared/utils';
-import {PageState} from '../../../../src/app/shared/page/page-state';
+import { ServiceTpl } from '../../model/servicetpl';
+import { isNotEmpty } from '../../../../src/app/shared/utils';
+import { PageState } from '../../../../src/app/shared/page/page-state';
 
 @Injectable()
 export class ServiceTplService {
@@ -21,8 +21,8 @@ export class ServiceTplService {
     params = params.set('pageNo', pageState.page.pageNo + '');
     params = params.set('pageSize', pageState.page.pageSize + '');
     params = params.set('sortby', '-id');
-    if ((typeof(appId) === 'undefined') || (!appId)) {
-        appId = 0;
+    if ((typeof (appId) === 'undefined') || (!appId)) {
+      appId = 0;
     }
     params = params.set('serviceId', serviceId === undefined ? '' : serviceId.toString());
     Object.getOwnPropertyNames(pageState.params).map(key => {
@@ -41,7 +41,7 @@ export class ServiceTplService {
           filterList.push(`${key}__contains=${value}`);
         }
       }
-    })
+    });
     if (filterList.length) {
       params = params.set('filter', filterList.join(','));
     }
@@ -53,7 +53,7 @@ export class ServiceTplService {
     return this.http
       .get(`/api/v1/apps/${appId}/services/tpls`, {params: params})
 
-      .catch(error => Observable.throw(error))
+      .catch(error => Observable.throw(error));
   }
 
   create(serviceTpl: ServiceTpl, appId: number): Observable<any> {
@@ -71,11 +71,11 @@ export class ServiceTplService {
   }
 
   deleteById(id: number, appId: number, logical?: boolean): Observable<any> {
-    let options : any = {};
+    let options: any = {};
     if (logical != null) {
       let params = new HttpParams();
       params = params.set('logical', logical + '');
-      options.params = params
+      options.params = params;
     }
 
     return this.http
