@@ -1,23 +1,26 @@
 <clr-vertical-nav [clrVerticalNavCollapsible]="true">
   <a
     clrVerticalNavLink
-    title="平台概览"
+    [title]="'MENU.PLATFORM_OVERVIEW' | translate"
     routerLink="reportform/overview"
     routerLinkActive="active">
     <clr-icon clrVerticalNavIcon shape="help-info"></clr-icon>
-    平台概览
+    {{ "MENU.PLATFORM_OVERVIEW" | translate }}
   </a>
   <div class="nav-divider"></div>
-  <clr-vertical-nav-group
-    routerLinkActive="active">
-    <clr-icon shape="image-gallery" title="系统概览" clrVerticalNavIcon></clr-icon>
-    系统统计
+  <clr-vertical-nav-group routerLinkActive="active">
+    <clr-icon
+      shape="image-gallery"
+      [title]="'MENU.SYSTEM_STATISTICS' | translate"
+      clrVerticalNavIcon>
+    </clr-icon>
+    {{ "MENU.SYSTEM_STATISTICS" | translate }}
     <clr-vertical-nav-group-children>
       <a clrVerticalNavLink
          routerLink="reportform/app"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        项目报表
+        {{ "MENU.PROJECT_REPORT" | translate }}
       </a>
     </clr-vertical-nav-group-children>
     <clr-vertical-nav-group-children>
@@ -25,20 +28,24 @@
          routerLink="reportform/deploy"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        上线统计
+        {{ "MENU.RELEASE_STATISTICS" | translate }}
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
   <clr-vertical-nav-group
     routerLinkActive="active">
-    <clr-icon shape="cog" title="系统信息" clrVerticalNavIcon></clr-icon>
-    配置
+    <clr-icon
+      shape="cog"
+      [title]="'MENU.CONFIGURATION' | translate"
+      clrVerticalNavIcon>
+    </clr-icon>
+      {{ "MENU.CONFIGURATION" | translate }}
     <clr-vertical-nav-group-children>
       <a clrVerticalNavLink
          routerLink="config/system"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        系统配置
+        {{"MENU.SYSTEM_CONFIGURATION" | translate }}
       </a>
     </clr-vertical-nav-group-children>
     <clr-vertical-nav-group-children>
@@ -46,221 +53,256 @@
          routerLink="config/database"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        数据库配置
+        {{"MENU.DATABASE_CONFIGURATION" | translate }}
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
   <clr-vertical-nav-group
     routerLinkActive="active">
-    <clr-icon shape="users" title="权限" clrVerticalNavIcon></clr-icon>
-    权限
+    <clr-icon
+      shape="users"
+      [title]="'MENU.PERMISSION' | translate"
+      clrVerticalNavIcon>
+    </clr-icon>
+      {{"MENU.PERMISSION" | translate }}
     <clr-vertical-nav-group-children>
       <a clrVerticalNavLink
          routerLink="system/user"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        用户列表
+        {{"MENU.USER_LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="system/group"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        角色列表
+        {{"MENU.ROLE_LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="system/permission"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        权限列表
+        {{"MENU.PERMISSION_LIST" | translate }}
       </a>
       <a *ngIf="this.authService.config['enableApiKeys']"
          clrVerticalNavLink
          routerLink="apikey"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        APIKeys
+        {{"MENU.API_KEYS" | translate }}
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
   <div class="nav-divider"></div>
   <clr-vertical-nav-group
     routerLinkActive="active">
-    <clr-icon shape="cloud-scale" title="集群" clrVerticalNavIcon></clr-icon>
-    集群
+    <clr-icon
+      shape="cloud-scale"
+      [title]="'MENU.CLUSTER' | translate"
+      clrVerticalNavIcon>
+    </clr-icon>
+      {{"MENU.CLUSTER" | translate }}
     <clr-vertical-nav-group-children *clrIfExpanded="false">
       <a clrVerticalNavLink
          [routerLink]="['cluster']"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        列表
+        {{"MENU.LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          [routerLink]="['cluster/trash']"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        回收站
+        {{"MENU.RECYCLED" | translate }}
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
   <clr-vertical-nav-group
     routerLinkActive="active">
-    <clr-icon shape="vmw-app" title="命名空间" clrVerticalNavIcon></clr-icon>
-    命名空间
+    <clr-icon
+      shape="vmw-app"
+      [title]="'MENU.NAMESPACE' | translate"
+      clrVerticalNavIcon>
+    </clr-icon>
+      {{"MENU.NAMESPACE" | translate }}
     <clr-vertical-nav-group-children *clrIfExpanded="false">
       <a clrVerticalNavLink
          routerLink="namespace"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        列表
+        {{"MENU.LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="namespace/trash"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        回收站
+        {{"MENU.RECYCLED" | translate }}
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
   <clr-vertical-nav-group
     routerLinkActive="active">
-    <clr-icon shape="window-restore" title="项目" clrVerticalNavIcon></clr-icon>
-    项目
+    <clr-icon
+      shape="window-restore"
+      [title]="'MENU.APP' | translate"
+      clrVerticalNavIcon>
+    </clr-icon>
+      {{"MENU.APP" | translate }}
     <clr-vertical-nav-group-children *clrIfExpanded="false">
       <a clrVerticalNavLink
          routerLink="app"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        列表
+        {{"MENU.LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="app/trash"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        回收站
+        {{"MENU.RECYCLED" | translate }}
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
   <div class="nav-divider"></div>
   <clr-vertical-nav-group
     routerLinkActive="active">
-    <clr-icon shape="event" title="部署" clrVerticalNavIcon></clr-icon>
-    部署
+    <clr-icon
+      shape="event"
+      [title]="'MENU.DEPLOYMENT' | translate"
+      clrVerticalNavIcon>
+    </clr-icon>
+      {{"MENU.DEPLOYMENT" | translate }}
     <clr-vertical-nav-group-children *clrIfExpanded="false">
       <a clrVerticalNavLink
          routerLink="deployment"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        列表
+        {{"MENU.LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="deployment/trash"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        回收站
+        {{"MENU.RECYCLED" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="deployment/tpl"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        模版列表
+        {{"MENU.TEMPLATE_LIST" | translate }}
+
       </a>
       <a clrVerticalNavLink
          routerLink="deployment/tpl/trash"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        模版回收站
+        {{"MENU.TEMPLATE_RECYCLED" | translate }}
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
 
 
   <clr-vertical-nav-group routerLinkActive="active">
-    <clr-icon shape="blocks-group" title="状态副本集" clrVerticalNavIcon></clr-icon>
-    状态副本集
+    <clr-icon 
+      shape="blocks-group"
+      [title]="'MENU.STATEFULSET' | translate"
+      clrVerticalNavIcon>
+    </clr-icon>
+      {{"MENU.STATEFULSET" | translate }}
     <clr-vertical-nav-group-children *clrIfExpanded="false">
       <a clrVerticalNavLink
-         routerLink="statefulset"
-         [routerLinkActiveOptions]="{exact:true}"
-         routerLinkActive="active">
-        列表
+        routerLink="statefulset"
+        [routerLinkActiveOptions]="{exact:true}"
+        routerLinkActive="active">
+        {{"MENU.LIST" | translate }}
       </a>
-      <a clrVerticalNavLink
-         routerLink="statefulset/trash"
-         [routerLinkActiveOptions]="{exact:true}"
-         routerLinkActive="active">
-        回收站
+      <a
+        clrVerticalNavLink
+        routerLink="statefulset/trash"
+        [routerLinkActiveOptions]="{exact:true}"
+        routerLinkActive="active">
+        {{"MENU.RECYCLED" | translate }}
       </a>
-      <a clrVerticalNavLink
-         routerLink="statefulset/tpl"
-         [routerLinkActiveOptions]="{exact:true}"
-         routerLinkActive="active">
-        模版列表
+      <a
+        clrVerticalNavLink
+        routerLink="statefulset/tpl"
+        [routerLinkActiveOptions]="{exact:true}"
+        routerLinkActive="active">
+        {{"MENU.TEMPLATE_LIST" | translate }}
       </a>
-      <a clrVerticalNavLink
-         routerLink="statefulset/tpl/trash"
-         [routerLinkActiveOptions]="{exact:true}"
-         routerLinkActive="active">
-        模版回收站
+      <a
+        clrVerticalNavLink
+        routerLink="statefulset/tpl/trash"
+        [routerLinkActiveOptions]="{exact:true}"
+        routerLinkActive="active">
+        {{"MENU.TEMPLATE_RECYCLED" | translate }}
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
   <clr-vertical-nav-group routerLinkActive="active">
-    <clr-icon shape="layers" title="守护进程集" clrVerticalNavIcon></clr-icon>
-    守护进程集
+    <clr-icon
+      shape="layers"
+      [title]="'MENU.DAEMONSET' | translate"
+      clrVerticalNavIcon></clr-icon>
+      {{"MENU.DAEMONSET" | translate }}
     <clr-vertical-nav-group-children *clrIfExpanded="false">
       <a clrVerticalNavLink
-         routerLink="daemonset"
-         [routerLinkActiveOptions]="{exact:true}"
-         routerLinkActive="active">
-        列表
+        routerLink="daemonset"
+        [routerLinkActiveOptions]="{exact:true}"
+        routerLinkActive="active">
+        {{"MENU.LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="daemonset/trash"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        回收站
+        {{"MENU.RECYCLED" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="daemonset/tpl"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        模版列表
+        {{"MENU.TEMPLATE_LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="daemonset/tpl/trash"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        模版回收站
+        {{"MENU.TEMPLATE_RECYCLED" | translate }}
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
   <clr-vertical-nav-group routerLinkActive="active">
-    <clr-icon shape="clock" title="计划任务" clrVerticalNavIcon></clr-icon>
-    计划任务
+    <clr-icon
+      shape="clock"
+      [title]="'MENU.CRONJOB' | translate"
+      clrVerticalNavIcon>
+    </clr-icon>
+      {{"MENU.CRONJOB" | translate }}
     <clr-vertical-nav-group-children *clrIfExpanded="false">
       <a clrVerticalNavLink
          routerLink="cronjob"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        列表
+        {{"MENU.LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="cronjob/trash"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        回收站
+        {{"MENU.RECYCLED" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="cronjob/tpl"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        模版列表
+        {{"MENU.TEMPLATE_LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="cronjob/tpl/trash"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        模版回收站
+        {{"MENU.TEMPLATE_RECYCLED" | translate }}
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
@@ -269,32 +311,36 @@
       <div class="nav-divider"></div>
       <clr-vertical-nav-group
         routerLinkActive="active">
-        <clr-icon shape="network-globe" title="负载均衡" clrVerticalNavIcon></clr-icon>
-        负载均衡
+        <clr-icon
+          shape="network-globe"
+          [title]="'MENU.SERVICE' | translate"
+          clrVerticalNavIcon>
+        </clr-icon>
+        {{"MENU.SERVICE" | translate }}
         <clr-vertical-nav-group-children *clrIfExpanded="false">
           <a clrVerticalNavLink
              routerLink="service"
              [routerLinkActiveOptions]="{exact:true}"
              routerLinkActive="active">
-            列表
+            {{"MENU.LIST" | translate }}
           </a>
           <a clrVerticalNavLink
              routerLink="service/trash"
              [routerLinkActiveOptions]="{exact:true}"
              routerLinkActive="active">
-            回收站
+            {{"MENU.RECYCLED" | translate }}
           </a>
           <a clrVerticalNavLink
              routerLink="service/tpl"
              [routerLinkActiveOptions]="{exact:true}"
              routerLinkActive="active">
-            模版列表
+            {{"MENU.TEMPLATE_LIST" | translate }}
           </a>
           <a clrVerticalNavLink
              routerLink="service/tpl/trash"
              [routerLinkActiveOptions]="{exact:true}"
              routerLinkActive="active">
-            模版回收站
+            {{"MENU.TEMPLATE_RECYCLED" | translate }}
           </a>
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>
@@ -332,107 +378,125 @@
   </ng-container>
   <div class="nav-divider"></div>
   <clr-vertical-nav-group routerLinkActive="active">
-    <clr-icon shape="file-settings" title="配置集" clrVerticalNavIcon></clr-icon>
-    配置集
+    <clr-icon
+      shape="file-settings"
+      [title]="'MENU.CONFIGMAP' | translate"
+      clrVerticalNavIcon>
+    </clr-icon>
+    {{"MENU.CONFIGMAP" | translate }}
     <clr-vertical-nav-group-children *clrIfExpanded="false">
       <a clrVerticalNavLink
          routerLink="configmap"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        列表
+        {{"MENU.LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="configmap/trash"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        回收站
+        {{"MENU.RECYCLED" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="configmap/tpl"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        模版列表
+        {{"MENU.TEMPLATE_LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="configmap/tpl/trash"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        模版回收站
+        {{"MENU.TEMPLATE_RECYCLED" | translate }}
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
   <clr-vertical-nav-group routerLinkActive="active">
-    <clr-icon shape="certificate" title="加密字典" clrVerticalNavIcon></clr-icon>
-    加密字典
+    <clr-icon
+      shape="certificate"
+      [title]="'MENU.SECRET' | translate"
+      clrVerticalNavIcon>
+    </clr-icon>
+      {{"MENU.SECRET" | translate }}
     <clr-vertical-nav-group-children *clrIfExpanded="false">
       <a clrVerticalNavLink
          routerLink="secret"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        列表
+        {{"MENU.LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="secret/trash"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        回收站
+        {{"MENU.RECYCLED" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="secret/tpl"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        模板列表
+        {{"MENU.TEMPLATE_LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="secret/tpl/trash"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        模板回收站
+        {{"MENU.TEMPLATE_RECYCLED" | translate }}
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
   <clr-vertical-nav-group routerLinkActive="active">
-    <clr-icon shape="storage" title="PVC" class="is-solid" clrVerticalNavIcon></clr-icon>
-    PVC
+    <clr-icon
+      shape="storage"
+      [title]="'MENU.PVC' | translate"
+      class="is-solid"
+      clrVerticalNavIcon>
+    </clr-icon>
+      {{"MENU.PVC" | translate }}
     <clr-vertical-nav-group-children *clrIfExpanded="false">
       <a clrVerticalNavLink
          routerLink="persistentvolumeclaim"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        列表
+        {{"MENU.LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="persistentvolumeclaim/trash"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        回收站
+        {{"MENU.RECYCLED" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="persistentvolumeclaim/tpl"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        模板列表
+        {{"MENU.TEMPLATE_LIST" | translate }}
       </a>
       <a clrVerticalNavLink
          routerLink="persistentvolumeclaim/tpl/trash"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
-        模板回收站
+        {{"MENU.TEMPLATE_RECYCLED" | translate }}
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
   <div class="nav-divider"></div>
   <clr-vertical-nav-group routerLinkActive="active">
-    <clr-icon shape="bell" title="通知审计" class="is-solid" clrVerticalNavIcon></clr-icon>
-    通知审计
+    <clr-icon
+      shape="bell"
+      [title]="'MENU.NOTIFICATION_AUDIT' | translate"
+      class="is-solid"
+      clrVerticalNavIcon>
+    </clr-icon>
+      {{"MENU.NOTIFICATION_AUDIT" | translate }}
     <clr-vertical-nav-group-children *clrIfExpanded="false">
       <a clrVerticalNavLink routerLink="notification" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="bell"></clr-icon>
-        通知
+        {{"MENU.NOTIFICATION" | translate }}
       </a>
       <a clrVerticalNavLink routerLink="auditlog" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="file-group"></clr-icon>
-        审计日志
+        {{"MENU.AUDIT_LOD" | translate }}
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
