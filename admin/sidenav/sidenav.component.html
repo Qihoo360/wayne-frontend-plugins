@@ -203,7 +203,7 @@
 
 
   <clr-vertical-nav-group routerLinkActive="active">
-    <clr-icon 
+    <clr-icon
       shape="blocks-group"
       [title]="'MENU.STATEFULSET' | translate"
       clrVerticalNavIcon>
@@ -338,6 +338,36 @@
           </a>
           <a clrVerticalNavLink
              routerLink="service/tpl/trash"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active">
+            {{"MENU.TEMPLATE_RECYCLED" | translate }}
+          </a>
+        </clr-vertical-nav-group-children>
+      </clr-vertical-nav-group>
+      <clr-vertical-nav-group routerLinkActive="active">
+        <clr-icon shape="network-switch" title="Ingress" clrVerticalNavIcon></clr-icon>
+        Ingress
+        <clr-vertical-nav-group-children *clrIfExpanded="false">
+          <a clrVerticalNavLink
+             routerLink="ingress"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active">
+            {{"MENU.LIST" | translate }}
+          </a>
+          <a clrVerticalNavLink
+             routerLink="ingress/trash"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active">
+            {{"MENU.RECYCLED" | translate }}
+          </a>
+          <a clrVerticalNavLink
+             routerLink="ingress/tpl"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active">
+            {{"MENU.TEMPLATE_LIST" | translate }}
+          </a>
+          <a clrVerticalNavLink
+             routerLink="ingress/tpl/trash"
              [routerLinkActiveOptions]="{exact:true}"
              routerLinkActive="active">
             {{"MENU.TEMPLATE_RECYCLED" | translate }}
