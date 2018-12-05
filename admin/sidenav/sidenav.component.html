@@ -203,7 +203,7 @@
 
 
   <clr-vertical-nav-group routerLinkActive="active">
-    <clr-icon 
+    <clr-icon
       shape="blocks-group"
       [title]="'MENU.STATEFULSET' | translate"
       clrVerticalNavIcon>
@@ -352,25 +352,25 @@
              routerLink="ingress"
              [routerLinkActiveOptions]="{exact:true}"
              routerLinkActive="active">
-            列表
+            {{"MENU.LIST" | translate }}
           </a>
           <a clrVerticalNavLink
              routerLink="ingress/trash"
              [routerLinkActiveOptions]="{exact:true}"
              routerLinkActive="active">
-            回收站
+            {{"MENU.RECYCLED" | translate }}
           </a>
           <a clrVerticalNavLink
              routerLink="ingress/tpl"
              [routerLinkActiveOptions]="{exact:true}"
              routerLinkActive="active">
-            模版列表
+            {{"MENU.TEMPLATE_LIST" | translate }}
           </a>
           <a clrVerticalNavLink
              routerLink="ingress/tpl/trash"
              [routerLinkActiveOptions]="{exact:true}"
              routerLinkActive="active">
-            模版回收站
+            {{"MENU.TEMPLATE_RECYCLED" | translate }}
           </a>
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>
