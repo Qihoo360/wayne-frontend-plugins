@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core'
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {NgForm} from "@angular/forms";
+import {NgForm} from '@angular/forms';
 import {MessageHandlerService} from "../../../../src/app/shared/message-handler/message-handler.service";
 import {ActionType, configKeyApiNameGenerateRule} from "../../../../src/app/shared/shared.const";
 import {App} from "../../../../src/app/shared/model/v1/app";

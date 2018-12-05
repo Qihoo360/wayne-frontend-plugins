@@ -297,6 +297,36 @@
           </a>
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>
+      <clr-vertical-nav-group routerLinkActive="active">
+        <clr-icon shape="network-switch" title="Ingress" clrVerticalNavIcon></clr-icon>
+        Ingress
+        <clr-vertical-nav-group-children *clrIfExpanded="false">
+          <a clrVerticalNavLink
+             routerLink="ingress"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active">
+            列表
+          </a>
+          <a clrVerticalNavLink
+             routerLink="ingress/trash"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active">
+            回收站
+          </a>
+          <a clrVerticalNavLink
+             routerLink="ingress/tpl"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active">
+            模版列表
+          </a>
+          <a clrVerticalNavLink
+             routerLink="ingress/tpl/trash"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active">
+            模版回收站
+          </a>
+        </clr-vertical-nav-group-children>
+      </clr-vertical-nav-group>
     </ng-container>
   </ng-container>
   <div class="nav-divider"></div>
