@@ -9,6 +9,41 @@
   </a>
   <div class="nav-divider"></div>
   <clr-vertical-nav-group routerLinkActive="active">
+    <clr-icon shape="world" title="Kubernetes" class="is-solid" clrVerticalNavIcon></clr-icon>
+    Kubernetes
+    <clr-vertical-nav-group-children *clrIfExpanded="false">
+      <a clrVerticalNavLink
+         routerLink="kubernetes/dashboard"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="dashboard"></clr-icon>
+        Dashboard
+      </a>
+      <a clrVerticalNavLink
+         routerLink="kubernetes/node"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="devices"></clr-icon>
+        Node
+      </a>
+      <a clrVerticalNavLink
+         routerLink="kubernetes/deployment"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="event"></clr-icon>
+        Deployment
+      </a>
+      <a clrVerticalNavLink
+         routerLink="kubernetes/persistentvolume"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="storage"></clr-icon>
+        PersistentVolume
+      </a>
+    </clr-vertical-nav-group-children>
+  </clr-vertical-nav-group>
+  <div class="nav-divider"></div>
+  <clr-vertical-nav-group routerLinkActive="active">
     <clr-icon
       shape="image-gallery"
       [title]="'MENU.SYSTEM_STATISTICS' | translate"
@@ -497,35 +532,6 @@
       <a clrVerticalNavLink routerLink="auditlog" routerLinkActive="active">
         <clr-icon clrVerticalNavIcon shape="file-group"></clr-icon>
         {{"MENU.AUDIT_LOD" | translate }}
-      </a>
-    </clr-vertical-nav-group-children>
-  </clr-vertical-nav-group>
-
-  <div class="nav-divider"></div>
-  <clr-vertical-nav-group routerLinkActive="active">
-    <clr-icon shape="world" title="Kubernetes" class="is-solid" clrVerticalNavIcon></clr-icon>
-    Kubernetes
-    <clr-vertical-nav-group-children *clrIfExpanded="false">
-      <a clrVerticalNavLink
-         routerLink="kubernetes/dashboard"
-         [routerLinkActiveOptions]="{exact:true}"
-         routerLinkActive="active">
-        <clr-icon clrVerticalNavIcon shape="dashboard"></clr-icon>
-        Dashboard
-      </a>
-      <a clrVerticalNavLink
-         routerLink="kubernetes/node"
-         [routerLinkActiveOptions]="{exact:true}"
-         routerLinkActive="active">
-        <clr-icon clrVerticalNavIcon shape="devices"></clr-icon>
-        Node
-      </a>
-      <a clrVerticalNavLink
-         routerLink="kubernetes/persistentvolume"
-         [routerLinkActiveOptions]="{exact:true}"
-         routerLinkActive="active">
-        <clr-icon clrVerticalNavIcon shape="storage"></clr-icon>
-        PersistentVolume
       </a>
     </clr-vertical-nav-group-children>
   </clr-vertical-nav-group>
