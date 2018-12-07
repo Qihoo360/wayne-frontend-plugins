@@ -23,7 +23,7 @@ import { Service } from '../../../shared/model/service';
 import { ServiceTpl } from '../../../shared/model/servicetpl';
 import { ServiceTplService } from '../../../shared/client/v1/servicetpl.service';
 import { ServiceService } from '../../../shared/client/v1/service.service';
-import { TplDetailService } from '../../../../src/app/portal/common/tpl-detail/tpl-detail.service';
+import { TplDetailService } from '../../../../src/app/shared/tpl-detail/tpl-detail.service';
 
 @Component({
   selector: 'list-service',
@@ -42,7 +42,7 @@ export class ListServiceComponent implements OnInit, OnDestroy {
   @Input() page: Page;
   @Input() appId: number;
   state: State;
-  currentPage: number = 1;
+  currentPage = 1;
 
   @Output() paginate = new EventEmitter<State>();
   @Output() serviceTab = new EventEmitter<number>();
@@ -62,7 +62,7 @@ export class ListServiceComponent implements OnInit, OnDestroy {
       if (message &&
         message.state === ConfirmationState.CONFIRMED &&
         message.source === ConfirmationTargets.SERVICE_TPL) {
-        let tplId = message.data;
+        const tplId = message.data;
         this.serviceTplService.deleteById(tplId, this.appId)
           .subscribe(
             response => {
@@ -108,7 +108,7 @@ export class ListServiceComponent implements OnInit, OnDestroy {
   publishServiceTpl(tpl: ServiceTpl) {
     this.serviceService.getById(tpl.serviceId, this.appId).subscribe(
       response => {
-        let service = response.data;
+        const service = response.data;
         this.publishTpl.newPublishTpl(service, tpl, ResourcesActionType.PUBLISH);
       },
       error => {
@@ -119,7 +119,7 @@ export class ListServiceComponent implements OnInit, OnDestroy {
   }
 
   serviceState(status: PublishStatus, tpl: ServiceTpl) {
-    if (status.cluster && status.state != TemplateState.NOT_FOUND) {
+    if (status.cluster && status.state !== TemplateState.NOT_FOUND) {
       this.serviceStatus.newServiceStatus(status.cluster, tpl);
     }
 
@@ -128,7 +128,7 @@ export class ListServiceComponent implements OnInit, OnDestroy {
   offlineServiceTpl(tpl: ServiceTpl) {
     this.serviceService.getById(tpl.serviceId, this.appId).subscribe(
       response => {
-        let service = response.data;
+        const service = response.data;
         this.publishTpl.newPublishTpl(service, tpl, ResourcesActionType.OFFLINE);
       },
       error => {
@@ -139,7 +139,7 @@ export class ListServiceComponent implements OnInit, OnDestroy {
   }
 
   deleteServiceTpl(tpl: ServiceTpl): void {
-    let deletionMessage = new ConfirmationMessage(
+    const deletionMessage = new ConfirmationMessage(
       '删除负载均衡模版确认',
       `你确认删除负载均衡模版${tpl.name}？`,
       tpl.id,
