@@ -119,7 +119,7 @@ export class ListServiceComponent implements OnInit, OnDestroy {
   }
 
   serviceState(status: PublishStatus, tpl: ServiceTpl) {
-    if (status.cluster && status.state != TemplateState.NOT_FOUND) {
+    if (status.cluster && status.state !== TemplateState.NOT_FOUND) {
       this.serviceStatus.newServiceStatus(status.cluster, tpl);
     }
 
