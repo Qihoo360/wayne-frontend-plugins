@@ -16,7 +16,7 @@ import { defaultService } from '../../../../src/app/shared/default-models/servic
 import { mergeDeep } from '../../../../src/app/shared/utils';
 import { Service } from '../../../shared/model/service';
 import { ServiceTpl } from '../../../shared/model/servicetpl';
-import { KubeService, ServicePort } from '../../../shared/model/kubernetes/service';
+import { KubeService, ObjectMeta, ServicePort } from '../../../shared/model/kubernetes/service';
 import { ServiceTplService } from '../../../shared/client/v1/servicetpl.service';
 import { ServiceService } from '../../../shared/client/v1/service.service';
 import { AuthService } from '../../../../src/app/shared/auth/auth.service';
@@ -32,8 +32,8 @@ export class CreateEditServiceTplComponent implements OnInit {
   currentForm: NgForm;
 
   serviceTpl: ServiceTpl = new ServiceTpl();
-  checkOnGoing: boolean = false;
-  isSubmitOnGoing: boolean = false;
+  checkOnGoing = false;
+  isSubmitOnGoing = false;
   actionType: ActionType;
   app: App;
   service: Service;
@@ -91,18 +91,18 @@ export class CreateEditServiceTplComponent implements OnInit {
   }
 
   defaultPort(): ServicePort {
-    let port = new ServicePort();
+    const port = new ServicePort();
     port.protocol = 'TCP';
     return port;
   }
 
   ngOnInit(): void {
     this.initDefault();
-    let appId = parseInt(this.route.parent.snapshot.params['id']);
-    let namespaceId = this.cacheService.namespaceId;
-    let serviceId = parseInt(this.route.snapshot.params['serviceId']);
-    let tplId = parseInt(this.route.snapshot.params['tplId']);
-    let observables = Array(
+    const appId = parseInt(this.route.parent.snapshot.params['id'], 10);
+    const namespaceId = this.cacheService.namespaceId;
+    const serviceId = parseInt(this.route.snapshot.params['serviceId'], 10);
+    const tplId = parseInt(this.route.snapshot.params['tplId'], 10);
+    const observables = Array(
       this.appService.getById(appId, namespaceId),
       this.serviceService.getById(serviceId, appId),
     );
@@ -116,7 +116,7 @@ export class CreateEditServiceTplComponent implements OnInit {
       response => {
         this.app = response[0].data;
         this.service = response[1].data;
-        let tpl = response[2];
+        const tpl = response[2];
         if (tpl) {
           this.serviceTpl = tpl.data;
           this.serviceTpl.description = null;
@@ -184,7 +184,7 @@ export class CreateEditServiceTplComponent implements OnInit {
   generateService(kubeService: KubeService): KubeService {
     if (this.labelSelector && this.labelSelector.length > 0) {
       kubeService.spec.selector = {};
-      for (let selector of this.labelSelector) {
+      for (const selector of this.labelSelector) {
         kubeService.spec.selector[selector.key] = selector.value;
       }
     }
@@ -213,7 +213,19 @@ export class CreateEditServiceTplComponent implements OnInit {
   }
 
   saveServiceTpl(kubeService: KubeService) {
+    this.removeUnused(kubeService);
     this.fillDefault(kubeService);
+  }
+
+  // remove unused fields, deal with user advanced mode paste yaml/json manually
+  removeUnused(obj: KubeService) {
+    const metaData = new ObjectMeta();
+    metaData.name = obj.metadata.name;
+    metaData.namespace = obj.metadata.namespace;
+    metaData.labels = obj.metadata.labels;
+    metaData.annotations = obj.metadata.annotations;
+    obj.metadata = metaData;
+    obj.status = undefined;
   }
 
   fillDefault(kubeService: KubeService) {
