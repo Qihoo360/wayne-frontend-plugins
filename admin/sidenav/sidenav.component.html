@@ -20,6 +20,13 @@
         Dashboard
       </a>
       <a clrVerticalNavLink
+         routerLink="kubernetes/namespace"
+         [routerLinkActiveOptions]="{exact:true}"
+         routerLinkActive="active">
+        <clr-icon clrVerticalNavIcon shape="vmw-app"></clr-icon>
+        Namespace
+      </a>
+      <a clrVerticalNavLink
          routerLink="kubernetes/node"
          [routerLinkActiveOptions]="{exact:true}"
          routerLinkActive="active">
