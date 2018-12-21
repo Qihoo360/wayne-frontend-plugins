@@ -24,6 +24,7 @@ import { ServiceTpl } from '../../../shared/model/servicetpl';
 import { ServiceTplService } from '../../../shared/client/v1/servicetpl.service';
 import { ServiceService } from '../../../shared/client/v1/service.service';
 import { TplDetailService } from '../../../../src/app/shared/tpl-detail/tpl-detail.service';
+import { DiffService } from '../../../../src/app/shared/diff/diff.service';
 
 @Component({
   selector: 'list-service',
@@ -31,6 +32,7 @@ import { TplDetailService } from '../../../../src/app/shared/tpl-detail/tpl-deta
   styleUrls: ['list-service.scss']
 })
 export class ListServiceComponent implements OnInit, OnDestroy {
+  selected: ServiceTpl[] = [];
   @Input() showState: object;
   @ViewChild(PublishServiceTplComponent)
   publishTpl: PublishServiceTplComponent;
@@ -56,6 +58,7 @@ export class ListServiceComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private aceEditorService: AceEditorService,
               private router: Router,
+              private diffService: DiffService,
               public authService: AuthService,
               private deletionDialogService: ConfirmationDialogService) {
     this.subscription = deletionDialogService.confirmationConfirm$.subscribe(message => {
@@ -84,6 +87,10 @@ export class ListServiceComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  diffTpl() {
+    this.diffService.diff(this.selected);
   }
 
   pageSizeChange(pageSize: number) {
