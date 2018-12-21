@@ -124,6 +124,10 @@ export class ServiceComponent implements AfterContentInit {
     });
   }
 
+  diffTpl() {
+    this.list.diffTpl();
+  }
+
   confirmEvent() {
     Object.keys(this.showState).forEach(key => {
       if (this.showList.indexOf(key) > -1) {
