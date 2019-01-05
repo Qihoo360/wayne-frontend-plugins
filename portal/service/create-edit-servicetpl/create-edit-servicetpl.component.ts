@@ -195,7 +195,9 @@ export class CreateEditServiceTplComponent implements OnInit {
     }
     if (kubeService.spec.ports && kubeService.spec.ports.length > 0) {
       for (let i = 0; i < kubeService.spec.ports.length; i++) {
-        kubeService.spec.ports[i].name = this.service.name + '-' + kubeService.spec.ports[i].port;
+        if(kubeService.spec.ports[i].name == undefined) {
+          kubeService.spec.ports[i].name = this.service.name + '-' + kubeService.spec.ports[i].port;
+        }
       }
     }
 
