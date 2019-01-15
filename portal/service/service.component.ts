@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { State } from '@clr/angular';
 import {
@@ -51,14 +51,14 @@ const showState = {
   templateUrl: './service.component.html',
   styleUrls: ['./service.component.scss']
 })
-export class ServiceComponent implements AfterContentInit {
+export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
   @ViewChild(ListServiceComponent)
   list: ListServiceComponent;
   @ViewChild(CreateEditServiceComponent)
   createEdit: CreateEditServiceComponent;
   serviceId: number;
   pageState: PageState = new PageState();
-  isOnline: boolean = false;
+  isOnline = false;
   services: Service[];
   serviceTpls: ServiceTpl[];
   app: App;
@@ -90,13 +90,13 @@ export class ServiceComponent implements AfterContentInit {
               private serviceTplService: ServiceTplService,
               private messageHandlerService: MessageHandlerService) {
     this.tabScription = this.tabDragService.tabDragOverObservable.subscribe(over => {
-      if (over) this.tabChange();
+      if (over) { this.tabChange(); }
     });
     this.subscription = deletionDialogService.confirmationConfirm$.subscribe(message => {
       if (message &&
         message.state === ConfirmationState.CONFIRMED &&
         message.source === ConfirmationTargets.SERVICE) {
-        let serviceId = message.data;
+        const serviceId = message.data;
         this.serviceService.deleteById(serviceId, this.app.id)
           .subscribe(
             response => {
@@ -120,7 +120,7 @@ export class ServiceComponent implements AfterContentInit {
   initShow() {
     this.showList = [];
     Object.keys(this.showState).forEach(key => {
-      if (!this.showState[key].hidden) this.showList.push(key);
+      if (!this.showState[key].hidden) { this.showList.push(key); }
     });
   }
 
@@ -145,11 +145,11 @@ export class ServiceComponent implements AfterContentInit {
   tabChange() {
     const orderList = [].slice.call(this.el.nativeElement.querySelectorAll('.tabs-item')).map((item, index) => {
       return {
-        id: parseInt(item.id),
+        id: parseInt(item.id, 10),
         order: index
       };
     });
-    if (this.orderCache && JSON.stringify(this.orderCache) === JSON.stringify(orderList)) return;
+    if (this.orderCache && JSON.stringify(this.orderCache) === JSON.stringify(orderList)) { return; }
     this.serviceService.updateOrder(this.appId, orderList).subscribe(
       response => {
         if (response.data === 'ok!') {
@@ -174,7 +174,7 @@ export class ServiceComponent implements AfterContentInit {
     } else {
       this.orderCache = [].slice.call(this.el.nativeElement.querySelectorAll('.tabs-item')).map((item, index) => {
         return {
-          id: parseInt(item.id),
+          id: parseInt(item.id, 10),
           order: index
         };
       });
@@ -190,14 +190,14 @@ export class ServiceComponent implements AfterContentInit {
   syncStatus(): void {
     if (this.serviceTpls && this.serviceTpls.length > 0) {
       for (let i = 0; i < this.serviceTpls.length; i++) {
-        let tpl = this.serviceTpls[i];
+        const tpl = this.serviceTpls[i];
         if (tpl.status && tpl.status.length > 0) {
           for (let j = 0; j < tpl.status.length; j++) {
-            let status = tpl.status[j];
-            if (status.errNum > 2) continue;
+            const status = tpl.status[j];
+            if (status.errNum > 2)  { continue; }
             this.serviceClient.get(this.appId, status.cluster, this.cacheService.kubeNamespace, tpl.name).subscribe(
               response => {
-                let code = response.statusCode | response.status;
+                const code = response.statusCode || response.status;
                 if (code === httpStatusCode.NoContent) {
                   this.serviceTpls[i].status[j].state = TemplateState.NOT_FOUND;
                   return;
@@ -238,10 +238,10 @@ export class ServiceComponent implements AfterContentInit {
 
   get selectedServiceCluster() {
     if (isNotEmpty(this.serviceId) && isArrayNotEmpty(this.services)) {
-      for (let svc of this.services) {
-        if (this.serviceId == svc.id) {
+      for (const svc of this.services) {
+        if (this.serviceId === svc.id) {
           try {
-            let metaData = JSON.parse(svc.metaData);
+            const metaData = JSON.parse(svc.metaData);
             if (metaData.clusters) {
               return metaData.clusters;
             }
@@ -256,8 +256,8 @@ export class ServiceComponent implements AfterContentInit {
 
   initService(refreshTpl?: boolean) {
     this.appId = this.route.parent.snapshot.params['id'];
-    let namespaceId = this.cacheService.namespaceId;
-    this.serviceId = parseInt(this.route.snapshot.params['serviceId']);
+    const namespaceId = this.cacheService.namespaceId;
+    this.serviceId = parseInt(this.route.snapshot.params['serviceId'], 10);
     Observable.combineLatest(
       this.serviceService.list(new PageState({pageSize: 50}), 'false', this.appId.toString()),
       this.appService.getById(this.appId, namespaceId),
@@ -284,8 +284,8 @@ export class ServiceComponent implements AfterContentInit {
       if (!serviceId) {
         return this.services[0].id;
       }
-      for (let svc of this.services) {
-        if (serviceId == svc.id) {
+      for (const svc of this.services) {
+        if (serviceId === svc.id) {
           return serviceId;
         }
       }
@@ -308,7 +308,8 @@ export class ServiceComponent implements AfterContentInit {
 
   cloneServiceTpl(tpl: ServiceTpl) {
     if (tpl) {
-      this.router.navigate([`portal/namespace/${this.cacheService.namespaceId}/app/${this.app.id}/service/${this.serviceId}/tpl/${tpl.id}`]);
+      this.router.navigate(
+        [`portal/namespace/${this.cacheService.namespaceId}/app/${this.app.id}/service/${this.serviceId}/tpl/${tpl.id}`]);
     }
 
   }
@@ -341,21 +342,21 @@ export class ServiceComponent implements AfterContentInit {
       this.publishService.listStatus(PublishType.SERVICE, this.serviceId)
     ).subscribe(
       response => {
-        let status = response[1].data;
+        const status = response[1].data;
         this.publishStatus = status;
-        let tplStatusMap = {};
+        const tplStatusMap = {};
         if (status && status.length > 0) {
-          for (let state of status) {
-            if (!tplStatusMap[state.templateId]) {
-              tplStatusMap[state.templateId] = Array<PublishStatus>();
+          for (const st of status) {
+            if (!tplStatusMap[st.templateId]) {
+              tplStatusMap[st.templateId] = Array<PublishStatus>();
             }
-            state.errNum = 0;
-            tplStatusMap[state.templateId].push(state);
+            st.errNum = 0;
+            tplStatusMap[st.templateId].push(st);
           }
         }
         this.tplStatusMap = tplStatusMap;
 
-        let tpls = response[0].data;
+        const tpls = response[0].data;
         this.pageState.page.totalPage = tpls.totalPage;
         this.pageState.page.totalCount = tpls.totalCount;
         this.serviceTpls = this.buildTplList(tpls.list);
@@ -368,15 +369,15 @@ export class ServiceComponent implements AfterContentInit {
   buildTplList(tpls: ServiceTpl[]): ServiceTpl[] {
     if (tpls && tpls.length > 0) {
       for (let i = 0; i < tpls.length; i++) {
-        let service: KubeService = JSON.parse(tpls[i].template);
+        const service: KubeService = JSON.parse(tpls[i].template);
         if (service.spec.ports && service.spec.ports.length > 0) {
-          let ports = Array<string>();
-          for (let port of  service.spec.ports) {
+          const ports = Array<string>();
+          for (const port of  service.spec.ports) {
             ports.push(`${port.port}:${port.targetPort}/${port.protocol}`);
           }
           tpls[i].ports = ports.join(', ');
 
-          let publishStatus = this.tplStatusMap[tpls[i].id];
+          const publishStatus = this.tplStatusMap[tpls[i].id];
           if (publishStatus && publishStatus.length > 0) {
             tpls[i].status = publishStatus;
           }
@@ -390,7 +391,7 @@ export class ServiceComponent implements AfterContentInit {
     if (this.publishStatus && this.publishStatus.length > 0) {
       this.messageHandlerService.warning('已上线负载均衡无法删除，请先下线负载均衡！');
     } else {
-      let deletionMessage = new ConfirmationMessage(
+      const deletionMessage = new ConfirmationMessage(
         '删除负载均衡确认',
         '是否确认删除负载均衡?',
         this.serviceId,

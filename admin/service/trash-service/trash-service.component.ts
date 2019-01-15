@@ -19,7 +19,7 @@ export class TrashServiceComponent implements OnInit, OnDestroy {
 
   services: Service[];
   pageState: PageState = new PageState();
-  currentPage: number = 1;
+  currentPage = 1;
   state: State;
 
   subscription: Subscription;
@@ -32,7 +32,7 @@ export class TrashServiceComponent implements OnInit, OnDestroy {
       if (message &&
         message.state === ConfirmationState.CONFIRMED &&
         message.source === ConfirmationTargets.TRASH_SERVICE) {
-        let id = message.data;
+        const id = message.data;
         this.serviceService.deleteById(id, 0, false)
           .subscribe(
             response => {
@@ -71,7 +71,7 @@ export class TrashServiceComponent implements OnInit, OnDestroy {
     this.serviceService.list(this.pageState, 'true')
       .subscribe(
         response => {
-          let data = response.data;
+          const data = response.data;
           this.pageState.page.totalPage = data.totalPage;
           this.pageState.page.totalCount = data.totalCount;
           this.services = data.list;
@@ -81,7 +81,7 @@ export class TrashServiceComponent implements OnInit, OnDestroy {
   }
 
   deleteService(service: Service) {
-    let deletionMessage = new ConfirmationMessage(
+    const deletionMessage = new ConfirmationMessage(
       '删除服务确认',
       '你确认永久删除服务 ' + service.name + ' ？删除后将不可恢复！',
       service.id,

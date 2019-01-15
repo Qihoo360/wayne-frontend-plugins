@@ -33,7 +33,7 @@
               *ngIf="authService.currentAppPermission.service.offline || authService.currentUser.admin">
         删除负载均衡
       </button>
-      <button class="wayne-button normal" (click)="diffTpl()">{{'BUTTON.DIFF_TMP' | translate}}</button>
+      <button class="wayne-button normal" (click)="diffTpl()">{{'BUTTON.COMPARE_TEMPLATE' | translate}}</button>
       <wayne-filter-box (confirm)="confirmEvent()" (cancel)="cancelEvent()">
         <wayne-checkbox-group [(ngModel)]="showList">
           <wayne-checkbox>创建时间</wayne-checkbox>

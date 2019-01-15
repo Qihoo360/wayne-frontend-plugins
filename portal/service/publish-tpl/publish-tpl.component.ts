@@ -23,13 +23,13 @@ import { KubeService } from '../../../shared/model/kubernetes/service';
 export class PublishServiceTplComponent {
   @Output() published = new EventEmitter<boolean>();
   @Input() appId: number;
-  modalOpened: boolean = false;
+  modalOpened = false;
   publishForm: NgForm;
   @ViewChild('publishForm')
   currentForm: NgForm;
   clusters = Array<Cluster>();
   serviceTpl: ServiceTpl;
-  isSubmitOnGoing: boolean = false;
+  isSubmitOnGoing = false;
   title: string;
   forceOffline: boolean;
   actionType: ResourcesActionType;
@@ -46,27 +46,27 @@ export class PublishServiceTplComponent {
     this.clusters = Array<Cluster>();
     this.actionType = actionType;
     this.forceOffline = false;
-    if (actionType == ResourcesActionType.PUBLISH) {
+    if (actionType === ResourcesActionType.PUBLISH) {
       this.title = '发布负载均衡[' + service.name + ']';
       if (!service.metaData) {
         this.messageHandlerService.warning('请先配置可发布集群');
         return;
       }
       this.modalOpened = true;
-      let metaData = JSON.parse(service.metaData);
-      for (let cluster of metaData.clusters) {
+      const metaData = JSON.parse(service.metaData);
+      for (const cluster of metaData.clusters) {
         if (this.cacheService.namespace.metaDataObj && this.cacheService.namespace.metaDataObj.clusterMeta[cluster]) {
-          let c = new Cluster();
+          const c = new Cluster();
           c.name = cluster;
           this.clusters.push(c);
         }
       }
 
-    } else if (actionType == ResourcesActionType.OFFLINE) {
+    } else if (actionType === ResourcesActionType.OFFLINE) {
       this.title = '下线负载均衡[' + service.name + ']';
       this.modalOpened = true;
-      for (let state of serviceTpl.status) {
-        let c = new Cluster();
+      for (const state of serviceTpl.status) {
+        const c = new Cluster();
         c.name = state.cluster;
         this.clusters.push(c);
       }
@@ -104,8 +104,8 @@ export class PublishServiceTplComponent {
 
   getStatusByCluster(status: PublishStatus[], cluster: string): PublishStatus {
     if (status && status.length > 0) {
-      for (let state of status) {
-        if (state.cluster == cluster) {
+      for (const state of status) {
+        if (state.cluster === cluster) {
           return state;
         }
       }
@@ -114,7 +114,7 @@ export class PublishServiceTplComponent {
   }
 
   offline(cluster: Cluster) {
-    let state = this.getStatusByCluster(this.serviceTpl.status, cluster.name);
+    const state = this.getStatusByCluster(this.serviceTpl.status, cluster.name);
     this.serviceClient.deleteByName(this.appId, cluster.name, this.cacheService.kubeNamespace, this.serviceTpl.name).subscribe(
       response => {
         this.deletePublishStatus(state.id);
@@ -142,7 +142,7 @@ export class PublishServiceTplComponent {
   }
 
   deploy(cluster: Cluster) {
-    let kubeService: KubeService = JSON.parse(this.serviceTpl.template);
+    const kubeService: KubeService = JSON.parse(this.serviceTpl.template);
     kubeService.metadata.namespace = this.cacheService.kubeNamespace;
     this.serviceClient.deploy(
       this.appId,

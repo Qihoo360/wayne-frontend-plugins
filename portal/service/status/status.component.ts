@@ -15,7 +15,7 @@ import { ServiceTpl } from '../../../shared/model/servicetpl';
 })
 
 export class ServiceStatusComponent {
-  createAppOpened: boolean = false;
+  createAppOpened = false;
   service: KubeService;
 
   constructor(private messageHandlerService: MessageHandlerService,
@@ -25,14 +25,14 @@ export class ServiceStatusComponent {
   }
 
   get appId(): number {
-    return parseInt(this.route.parent.snapshot.params['id']);
+    return parseInt(this.route.parent.snapshot.params['id'], 10);
   }
 
   getPorts() {
-    let ports = [];
+    const ports = [];
     if (this.service && this.service.spec.ports) {
-      for (let port of this.service.spec.ports) {
-        let nodePort = port.nodePort ? port.nodePort : port.port;
+      for (const port of this.service.spec.ports) {
+        const nodePort = port.nodePort ? port.nodePort : port.port;
         ports.push(
           `${port.targetPort}:${nodePort}/${port.protocol}`);
       }
@@ -41,7 +41,7 @@ export class ServiceStatusComponent {
   }
 
   getSelectors() {
-    let lables = [];
+    const lables = [];
     if (this.service && this.service.spec.selector) {
       Object.getOwnPropertyNames(this.service.spec.selector).map(key => {
         lables.push(`${key}:${this.service.spec.selector[key]}`);
@@ -53,7 +53,7 @@ export class ServiceStatusComponent {
   newServiceStatus(cluster: string, serviceTpl: ServiceTpl) {
     this.createAppOpened = true;
 
-    let service: KubeService = JSON.parse(serviceTpl.template);
+    const service: KubeService = JSON.parse(serviceTpl.template);
     this.serviceClient.get(this.appId, cluster, this.cacheService.kubeNamespace, service.metadata.name).subscribe(
       response => {
         this.service = response.data;
