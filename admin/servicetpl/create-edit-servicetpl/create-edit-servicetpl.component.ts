@@ -28,8 +28,8 @@ export class CreateEditServiceTplComponent implements OnInit {
   currentForm: NgForm;
 
   serviceTpl: ServiceTpl = new ServiceTpl();
-  checkOnGoing: boolean = false;
-  isSubmitOnGoing: boolean = false;
+  checkOnGoing = false;
+  isSubmitOnGoing = false;
 
   title: string;
   actionType: ActionType;
@@ -99,8 +99,8 @@ export class CreateEditServiceTplComponent implements OnInit {
       return;
     }
     this.serviceTpl.template = this.aceBox.getValue();
-    for (let service of this.services) {
-      if (service.id == this.serviceTpl.serviceId) {
+    for (const service of this.services) {
+      if (service.id === this.serviceTpl.serviceId) {
         this.serviceTpl.name = service.name;
       }
     }

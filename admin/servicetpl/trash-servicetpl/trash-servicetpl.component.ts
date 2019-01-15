@@ -19,7 +19,7 @@ export class TrashServiceTplComponent implements OnInit, OnDestroy {
 
   serviceTpls: ServiceTpl[];
   pageState: PageState = new PageState();
-  currentPage: number = 1;
+  currentPage = 1;
   state: State;
 
   subscription: Subscription;
@@ -32,7 +32,7 @@ export class TrashServiceTplComponent implements OnInit, OnDestroy {
       if (message &&
         message.state === ConfirmationState.CONFIRMED &&
         message.source === ConfirmationTargets.TRASH_SERVICE_TPL) {
-        let id = message.data;
+        const id = message.data;
         this.serviceTplService
           .deleteById(id, 0, false)
           .subscribe(
@@ -73,7 +73,7 @@ export class TrashServiceTplComponent implements OnInit, OnDestroy {
     this.serviceTplService.listPage(this.pageState, 0)
       .subscribe(
         response => {
-          let data = response.data;
+          const data = response.data;
           this.pageState.page.totalPage = data.totalPage;
           this.pageState.page.totalCount = data.totalCount;
           this.serviceTpls = data.list;
@@ -83,7 +83,7 @@ export class TrashServiceTplComponent implements OnInit, OnDestroy {
   }
 
   deleteServiceTpl(serviceTpl: ServiceTpl) {
-    let deletionMessage = new ConfirmationMessage(
+    const deletionMessage = new ConfirmationMessage(
       '删除服务确认',
       '你确认永久删除服务模版 ' + serviceTpl.name + ' ？删除后将不可恢复！',
       serviceTpl.id,

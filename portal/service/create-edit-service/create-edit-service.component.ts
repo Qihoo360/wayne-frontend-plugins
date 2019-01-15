@@ -26,9 +26,9 @@ export class CreateEditServiceComponent implements OnInit {
   currentForm: NgForm;
 
   service: Service = new Service();
-  checkOnGoing: boolean = false;
-  isSubmitOnGoing: boolean = false;
-  isNameValid: boolean = true;
+  checkOnGoing = false;
+  isSubmitOnGoing = false;
+  isNameValid = true;
   title: string;
   actionType: ActionType;
   app: App;
@@ -48,7 +48,7 @@ export class CreateEditServiceComponent implements OnInit {
     this.app = app;
     this.clusters = Array<Cluster>();
     if (clusters && clusters.length > 0) {
-      for (let c of clusters) {
+      for (const c of clusters) {
         c.checked = false;
         this.clusters.push(c);
       }
@@ -58,16 +58,16 @@ export class CreateEditServiceComponent implements OnInit {
       this.title = '编辑负载均衡';
       this.serviceService.getById(id, this.app.id).subscribe(
         status => {
-          let data = status.data;
+          const data = status.data;
           this.service = data;
           if (!data.metaData) {
             data.metaData = '{}';
           }
-          let metaData = JSON.parse(data.metaData);
+          const metaData = JSON.parse(data.metaData);
           if (metaData['clusters']) {
-            for (let cluster of metaData['clusters']) {
+            for (const cluster of metaData['clusters']) {
               for (let i = 0; i < this.clusters.length; i++) {
-                if (cluster == this.clusters[i].name) {
+                if (cluster === this.clusters[i].name) {
                   this.clusters[i].checked = true;
                 }
               }
@@ -104,8 +104,8 @@ export class CreateEditServiceComponent implements OnInit {
     if (!this.service.metaData) {
       this.service.metaData = '{}';
     }
-    let metaData = JSON.parse(this.service.metaData);
-    let checkedCluster = Array<string>();
+    const metaData = JSON.parse(this.service.metaData);
+    const checkedCluster = Array<string>();
     this.clusters.map(cluster => {
       if (cluster.checked) {
         checkedCluster.push(cluster.name);
@@ -160,9 +160,9 @@ export class CreateEditServiceComponent implements OnInit {
       !this.checkOnGoing;
   }
 
-  //Handle the form validation
+  // Handle the form validation
   handleValidation(): void {
-    let cont = this.currentForm.controls['name'];
+    const cont = this.currentForm.controls['name'];
     if (cont) {
       this.isNameValid = cont.valid;
     }

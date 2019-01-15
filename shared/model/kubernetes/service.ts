@@ -4,33 +4,17 @@
 export class LoadBalancerIngress {
   ip: string;
   hostname: string;
-  //[LoadBalancerIngress:]
-
-
-  //[end]
 }
 
 export class LoadBalancerStatus {
   ingress: LoadBalancerIngress[];
-  //[LoadBalancerStatus:]
-
-
-  //[end]
 }
 
 export class ServiceStatus {
   loadBalancer: LoadBalancerStatus;
-  //[ServiceStatus:]
-
-
-  //[end]
 }
 
 export class IntOrString {
-  //[IntOrString:]
-
-
-  //[end]
 }
 
 export class ServicePort {
@@ -39,10 +23,6 @@ export class ServicePort {
   port: number;
   targetPort: IntOrString;
   nodePort: number;
-  //[ServicePort:]
-
-
-  //[end]
 }
 
 export class ServiceSpec {
@@ -57,20 +37,12 @@ export class ServiceSpec {
   externalName: string;
   externalTrafficPolicy: string;
   healthCheckNodePort: number;
-  //[ServiceSpec:]
-
-
-  //[end]
 }
 
 export class StatusCause {
   reason: string;
   message: string;
   field: string;
-  //[StatusCause:]
-
-
-  //[end]
 }
 
 export class StatusDetails {
@@ -80,19 +52,11 @@ export class StatusDetails {
   uid: string;
   causes: StatusCause[];
   retryAfterSeconds: number;
-  //[StatusDetails:]
-
-
-  //[end]
 }
 
 export class ListMeta {
   selfLink: string;
   resourceVersion: string;
-  //[ListMeta:]
-
-
-  //[end]
 }
 
 export class Status {
@@ -104,27 +68,15 @@ export class Status {
   reason: string;
   details: StatusDetails;
   code: number;
-  //[Status:]
-
-
-  //[end]
 }
 
 export class Initializer {
   name: string;
-  //[Initializer:]
-
-
-  //[end]
 }
 
 export class Initializers {
   pending: Initializer[];
   result: Status;
-  //[Initializers:]
-
-
-  //[end]
 }
 
 export class OwnerReference {
@@ -134,17 +86,9 @@ export class OwnerReference {
   uid: string;
   controller: boolean;
   blockOwnerDeletion: boolean;
-  //[OwnerReference:]
-
-
-  //[end]
 }
 
 export class Time {
-  //[Time:]
-
-
-  //[end]
 }
 
 export class ObjectMeta {
@@ -164,10 +108,6 @@ export class ObjectMeta {
   initializers: Initializers;
   finalizers: string[];
   clusterName: string;
-  //[ObjectMeta:]
-
-
-  //[end]
 }
 
 export class KubeService {
@@ -176,8 +116,4 @@ export class KubeService {
   metadata: ObjectMeta;
   spec: ServiceSpec;
   status: ServiceStatus;
-  //[Service:]
-
-
-  //[end]
 }

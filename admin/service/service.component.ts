@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { State } from '@clr/angular';
 import { ConfirmationDialogService } from '../../../src/app/shared/confirmation-dialog/confirmation-dialog.service';
@@ -17,7 +17,7 @@ import { PageState } from '../../../src/app/shared/page/page-state';
   templateUrl: './service.component.html',
   styleUrls: ['./service.component.scss']
 })
-export class ServiceComponent implements OnInit {
+export class ServiceComponent implements OnInit, OnDestroy {
   @ViewChild(ListServiceComponent)
   list: ListServiceComponent;
   @ViewChild(CreateEditServiceComponent)
@@ -39,7 +39,7 @@ export class ServiceComponent implements OnInit {
       if (message &&
         message.state === ConfirmationState.CONFIRMED &&
         message.source === ConfirmationTargets.SERVICE) {
-        let id = message.data;
+        const id = message.data;
         this.serviceService.deleteById(id, 0)
           .subscribe(
             response => {
@@ -57,7 +57,7 @@ export class ServiceComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.appId = params['aid'];
-      if (typeof (this.appId) == 'undefined') {
+      if (typeof (this.appId) === 'undefined') {
         this.appId = '';
       }
     });
@@ -76,7 +76,7 @@ export class ServiceComponent implements OnInit {
     this.serviceService.list(this.pageState, 'false', this.appId)
       .subscribe(
         response => {
-          let data = response.data;
+          const data = response.data;
           this.pageState.page.totalPage = data.totalPage;
           this.pageState.page.totalCount = data.totalCount;
           this.services = data.list;
@@ -96,7 +96,7 @@ export class ServiceComponent implements OnInit {
   }
 
   deleteService(service: Service) {
-    let deletionMessage = new ConfirmationMessage(
+    const deletionMessage = new ConfirmationMessage(
       '删除服务确认',
       '你确认删除服务 ' + service.name + ' ？',
       service.id,

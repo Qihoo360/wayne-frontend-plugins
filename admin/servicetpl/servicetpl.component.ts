@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { State } from '@clr/angular';
 import { ConfirmationDialogService } from '../../../src/app/shared/confirmation-dialog/confirmation-dialog.service';
@@ -17,7 +17,7 @@ import { PageState } from '../../../src/app/shared/page/page-state';
   templateUrl: './servicetpl.component.html',
   styleUrls: ['./servicetpl.component.scss']
 })
-export class ServiceTplComponent implements OnInit {
+export class ServiceTplComponent implements OnInit, OnDestroy {
   @ViewChild(ListServiceTplComponent)
   list: ListServiceTplComponent;
   @ViewChild(CreateEditServiceTplComponent)
@@ -39,7 +39,7 @@ export class ServiceTplComponent implements OnInit {
       if (message &&
         message.state === ConfirmationState.CONFIRMED &&
         message.source === ConfirmationTargets.SERVICE_TPL) {
-        let id = message.data;
+        const id = message.data;
         this.serviceTplService.deleteById(id, 0)
           .subscribe(
             response => {
@@ -57,7 +57,7 @@ export class ServiceTplComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.serviceId = params['sid'];
-      if (typeof (this.serviceId) == 'undefined') {
+      if (typeof (this.serviceId) === 'undefined') {
         this.serviceId = '';
       }
     });
@@ -81,7 +81,7 @@ export class ServiceTplComponent implements OnInit {
     this.serviceTplService.listPage(this.pageState, 0, this.serviceId)
       .subscribe(
         response => {
-          let data = response.data;
+          const data = response.data;
           this.pageState.page.totalPage = data.totalPage;
           this.pageState.page.totalCount = data.totalCount;
           this.serviceTpls = data.list;
@@ -101,7 +101,7 @@ export class ServiceTplComponent implements OnInit {
   }
 
   deleteServiceTpl(serviceTpl: ServiceTpl) {
-    let deletionMessage = new ConfirmationMessage(
+    const deletionMessage = new ConfirmationMessage(
       '删除服务模版确认',
       '你确认删除服务模版 ' + serviceTpl.name + ' ？',
       serviceTpl.id,

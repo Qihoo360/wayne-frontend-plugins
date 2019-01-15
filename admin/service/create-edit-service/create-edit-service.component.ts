@@ -29,9 +29,9 @@ export class CreateEditServiceComponent implements OnInit {
   aceBox: any;
 
   service: Service = new Service();
-  checkOnGoing: boolean = false;
-  isSubmitOnGoing: boolean = false;
-  isNameValid: boolean = true;
+  checkOnGoing = false;
+  isSubmitOnGoing = false;
+  isNameValid = true;
 
   title: string;
   actionType: ActionType;
@@ -138,9 +138,9 @@ export class CreateEditServiceComponent implements OnInit {
       !this.checkOnGoing;
   }
 
-  //Handle the form validation
+  // Handle the form validation
   handleValidation(): void {
-    let cont = this.currentForm.controls['name'];
+    const cont = this.currentForm.controls['name'];
     if (cont) {
       this.isNameValid = cont.valid;
     }

@@ -39,7 +39,7 @@
         </div>
         <div *ngFor="let selector of getSelectors(); let i = index" class="row group">
           <div class="col-sm-3">
-            <div *ngIf="i == 0">选择器</div>
+            <div *ngIf="i === 0">选择器</div>
           </div>
           <div class="col-sm-9">
             {{selector}}
