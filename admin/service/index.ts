@@ -4,7 +4,7 @@ import { ServiceModule } from './service.module';
 
 
 export const SERVICE_ADMIN_PATH = [
-  {path: 'app/service/:aid', component: ServiceComponent},
+  {path: 'service/app/:aid', component: ServiceComponent},
   {path: 'service', component: ServiceComponent},
   {path: 'service/trash', component: TrashServiceComponent},
 ];
