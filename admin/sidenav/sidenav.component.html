@@ -354,6 +354,47 @@
       <clr-vertical-nav-group
         routerLinkActive="active">
         <clr-icon
+          shape="cloud-scale"
+          [title]="'MENU.AUTO_POD_SCALE' | translate"
+          clrVerticalNavIcon>
+        </clr-icon>
+        {{'MENU.AUTO_POD_SCALE' | translate}}
+        <clr-vertical-nav-group-children *clrIfExpanded="false">
+          <a clrVerticalNavLink
+             routerLink="hpa"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active">
+            {{"MENU.LIST" | translate }}
+          </a>
+          <a clrVerticalNavLink
+             routerLink="hpa/trash"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active">
+            {{"MENU.RECYCLED" | translate }}
+          </a>
+          <a clrVerticalNavLink
+             routerLink="hpa/tpl"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active">
+            {{"MENU.TEMPLATE_LIST" | translate }}
+          </a>
+          <a clrVerticalNavLink
+             routerLink="hpa/tpl/trash"
+             [routerLinkActiveOptions]="{exact:true}"
+             routerLinkActive="active">
+            {{"MENU.TEMPLATE_RECYCLED" | translate }}
+          </a>
+        </clr-vertical-nav-group-children>
+      </clr-vertical-nav-group>
+    </ng-container>
+  </ng-container>
+
+  <ng-container>
+    <ng-container>
+      <div class="nav-divider"></div>
+      <clr-vertical-nav-group
+        routerLinkActive="active">
+        <clr-icon
           shape="network-globe"
           [title]="'MENU.SERVICE' | translate"
           clrVerticalNavIcon>
