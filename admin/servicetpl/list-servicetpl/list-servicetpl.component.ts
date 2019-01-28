@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { State } from '@clr/angular';
+import { ClrDatagridStateInterface } from '@clr/angular';
 import { ServiceTpl } from '../../../shared/model/servicetpl';
 import { Page } from '../../../../src/app/shared/page/page-state';
 
@@ -14,9 +14,9 @@ export class ListServiceTplComponent implements OnInit {
 
   @Input() page: Page;
   currentPage = 1;
-  state: State;
+  state: ClrDatagridStateInterface;
 
-  @Output() paginate = new EventEmitter<State>();
+  @Output() paginate = new EventEmitter<ClrDatagridStateInterface>();
   @Output() delete = new EventEmitter<ServiceTpl>();
   @Output() edit = new EventEmitter<ServiceTpl>();
 
@@ -34,7 +34,7 @@ export class ListServiceTplComponent implements OnInit {
     this.paginate.emit(this.state);
   }
 
-  refresh(state: State) {
+  refresh(state: ClrDatagridStateInterface) {
     this.state = state;
     this.paginate.emit(state);
   }

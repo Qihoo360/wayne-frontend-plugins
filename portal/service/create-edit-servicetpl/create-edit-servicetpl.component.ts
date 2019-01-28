@@ -6,7 +6,7 @@ import { NgForm } from '@angular/forms';
 import { MessageHandlerService } from '../../../../src/app/shared/message-handler/message-handler.service';
 import { ActionType, appLabelKey, namespaceLabelKey } from '../../../../src/app/shared/shared.const';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { combineLatest } from 'rxjs';
 import { App } from '../../../../src/app/shared/model/v1/app';
 import { AppService } from '../../../../src/app/shared/client/v1/app.service';
 import { CacheService } from '../../../../src/app/shared/auth/cache.service';
@@ -112,7 +112,7 @@ export class CreateEditServiceTplComponent implements OnInit {
     } else {
       this.actionType = ActionType.ADD_NEW;
     }
-    Observable.combineLatest(observables).subscribe(
+    combineLatest(observables).subscribe(
       response => {
         this.app = response[0].data;
         this.service = response[1].data;

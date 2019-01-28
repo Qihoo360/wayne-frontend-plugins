@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { State } from '@clr/angular';
+import { ClrDatagridStateInterface } from '@clr/angular';
 import { ConfirmationMessage } from '../../../../src/app/shared/confirmation-dialog/confirmation-message';
 import {
   ConfirmationButtons,
@@ -43,10 +43,10 @@ export class ListServiceComponent implements OnInit, OnDestroy {
   @Input() serviceTpls: ServiceTpl[];
   @Input() page: Page;
   @Input() appId: number;
-  state: State;
+  state: ClrDatagridStateInterface;
   currentPage = 1;
 
-  @Output() paginate = new EventEmitter<State>();
+  @Output() paginate = new EventEmitter<ClrDatagridStateInterface>();
   @Output() serviceTab = new EventEmitter<number>();
   @Output() cloneTpl = new EventEmitter<ServiceTpl>();
   subscription: Subscription;
@@ -156,7 +156,7 @@ export class ListServiceComponent implements OnInit, OnDestroy {
     this.deletionDialogService.openComfirmDialog(deletionMessage);
   }
 
-  refresh(state?: State) {
+  refresh(state?: ClrDatagridStateInterface) {
     this.state = state;
     this.paginate.emit(state);
   }
