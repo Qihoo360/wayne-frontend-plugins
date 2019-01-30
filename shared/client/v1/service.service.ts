@@ -8,6 +8,7 @@ import { Service } from '../../model/service';
 import { PageState } from '../../../../src/app/shared/page/page-state';
 import { isNotEmpty } from '../../../../src/app/shared/utils';
 import { OrderItem } from '../../../../src/app/shared/model/v1/order';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class ServiceService {
@@ -25,7 +26,7 @@ export class ServiceService {
     return this.http
       .get(`/api/v1/apps/${appId}/services/names`, {params: params})
 
-      .catch(error => Observable.throw(error));
+      .catch(error => throwError(error));
   }
 
   list(pageState: PageState, deleted?: string, appId?: string): Observable<any> {
@@ -67,28 +68,28 @@ export class ServiceService {
     return this.http
       .get(`/api/v1/apps/${appId}/services`, {params: params})
 
-      .catch(error => Observable.throw(error));
+      .catch(error => throwError(error));
   }
 
   create(service: Service): Observable<any> {
     return this.http
       .post(`/api/v1/apps/${service.appId}/services`, service, this.options)
 
-      .catch(error => Observable.throw(error));
+      .catch(error => throwError(error));
   }
 
   update(service: Service): Observable<any> {
     return this.http
       .put(`/api/v1/apps/${service.appId}/services/${service.id}`, service, this.options)
 
-      .catch(error => Observable.throw(error));
+      .catch(error => throwError(error));
   }
 
   updateOrder(appId: number, orderList: Array<OrderItem>): Observable<any> {
     return this.http
       .put(`/api/v1/apps/${appId}/services/updateorders`, orderList, this.options)
 
-      .catch(error => Observable.throw(error));
+      .catch(error => throwError(error));
   }
 
   deleteById(id: number, appId: number, logical?: boolean): Observable<any> {
@@ -102,13 +103,13 @@ export class ServiceService {
     return this.http
       .delete(`/api/v1/apps/${appId}/services/${id}`, options)
 
-      .catch(error => Observable.throw(error));
+      .catch(error => throwError(error));
   }
 
   getById(id: number, appId: number): Observable<any> {
     return this.http
       .get(`/api/v1/apps/${appId}/services/${id}`)
 
-      .catch(error => Observable.throw(error));
+      .catch(error => throwError(error));
   }
 }
