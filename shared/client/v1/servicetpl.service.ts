@@ -7,6 +7,7 @@ import 'rxjs/add/observable/throw';
 import { ServiceTpl } from '../../model/servicetpl';
 import { isNotEmpty } from '../../../../src/app/shared/utils';
 import { PageState } from '../../../../src/app/shared/page/page-state';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class ServiceTplService {
@@ -53,21 +54,21 @@ export class ServiceTplService {
     return this.http
       .get(`/api/v1/apps/${appId}/services/tpls`, {params: params})
 
-      .catch(error => Observable.throw(error));
+      .catch(error => throwError(error));
   }
 
   create(serviceTpl: ServiceTpl, appId: number): Observable<any> {
     return this.http
       .post(`/api/v1/apps/${appId}/services/tpls`, serviceTpl, this.options)
 
-      .catch(error => Observable.throw(error));
+      .catch(error => throwError(error));
   }
 
   update(serviceTpl: ServiceTpl, appId: number): Observable<any> {
     return this.http
       .put(`/api/v1/apps/${appId}/services/tpls/${serviceTpl.id}`, serviceTpl, this.options)
 
-      .catch(error => Observable.throw(error));
+      .catch(error => throwError(error));
   }
 
   deleteById(id: number, appId: number, logical?: boolean): Observable<any> {
@@ -81,13 +82,13 @@ export class ServiceTplService {
     return this.http
       .delete(`/api/v1/apps/${appId}/services/tpls/${id}`, options)
 
-      .catch(error => Observable.throw(error));
+      .catch(error => throwError(error));
   }
 
   getById(id: number, appId: number): Observable<any> {
     return this.http
       .get(`/api/v1/apps/${appId}/services/tpls/${id}`)
 
-      .catch(error => Observable.throw(error));
+      .catch(error => throwError(error));
   }
 }
