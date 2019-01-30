@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { State } from '@clr/angular';
+import { ClrDatagridStateInterface } from '@clr/angular';
 import {
   ConfirmationButtons,
   ConfirmationState,
@@ -13,7 +13,7 @@ import {
 import { MessageHandlerService } from '../../../src/app/shared/message-handler/message-handler.service';
 import { ListServiceComponent } from './list-service/list-service.component';
 import { CreateEditServiceComponent } from './create-edit-service/create-edit-service.component';
-import { Observable } from 'rxjs/Observable';
+import { combineLatest } from 'rxjs';
 import { AppService } from '../../../src/app/shared/client/v1/app.service';
 import { App } from '../../../src/app/shared/model/v1/app';
 import { CacheService } from '../../../src/app/shared/auth/cache.service';
@@ -258,7 +258,7 @@ export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
     this.appId = this.route.parent.snapshot.params['id'];
     const namespaceId = this.cacheService.namespaceId;
     this.serviceId = parseInt(this.route.snapshot.params['serviceId'], 10);
-    Observable.combineLatest(
+    combineLatest(
       this.serviceService.list(new PageState({pageSize: 50}), 'false', this.appId.toString()),
       this.appService.getById(this.appId, namespaceId),
       this.clusterService.getNames(),
@@ -328,7 +328,7 @@ export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
     this.retrieve();
   }
 
-  retrieve(state?: State): void {
+  retrieve(state?: ClrDatagridStateInterface): void {
     if (!this.serviceId) {
       return;
     }
@@ -337,7 +337,7 @@ export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
     }
     this.pageState.params['deleted'] = false;
     this.pageState.params['isOnline'] = this.isOnline;
-    Observable.combineLatest(
+    combineLatest(
       this.serviceTplService.listPage(this.pageState, this.app.id, this.serviceId.toString()),
       this.publishService.listStatus(PublishType.SERVICE, this.serviceId)
     ).subscribe(
