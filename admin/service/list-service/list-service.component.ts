@@ -56,21 +56,19 @@ export class ListServiceComponent implements OnInit {
     this.edit.emit(service);
   }
 
-  goToLink(service: Service, gate: string) {
-    let linkUrl = new Array();
+  goToLink(obj: Service, gate: string) {
+    let linkUrl = '';
     switch (gate) {
       case 'tpl':
-        this.breadcrumbService.addFriendlyNameForRouteRegex('/admin/service/relate-tpl/[0-9]*', '[' + service.name + ']模板列表');
-        linkUrl = ['admin', 'service', 'relate-tpl', service.id];
+        linkUrl = `/admin/service/tpl?serviceId=${obj.id}`;
         break;
       case 'app':
-        this.breadcrumbService.addFriendlyNameForRouteRegex('/admin/service/app/[0-9]*', '[' + service.app.name + ']项目详情');
-        linkUrl = ['admin', 'service', 'app', service.app.id];
+        linkUrl = `admin/app?id=${obj.app.id}`;
         break;
       default:
         break;
     }
-    this.router.navigate(linkUrl);
+    this.router.navigateByUrl(linkUrl);
   }
 
   detailMetaDataTpl(tpl: string) {

@@ -11,6 +11,7 @@ import { CreateEditServiceTplComponent } from './create-edit-servicetpl/create-e
 import { ServiceTpl } from '../../shared/model/servicetpl';
 import { ServiceTplService } from '../../shared/client/v1/servicetpl.service';
 import { PageState } from '../../../src/app/shared/page/page-state';
+import { isNotEmpty } from '../../../src/app/shared/utils';
 
 @Component({
   selector: 'wayne-servicetpl',
@@ -78,6 +79,14 @@ export class ServiceTplComponent implements OnInit, OnDestroy {
       });
     }
     this.pageState.params['deleted'] = false;
+    if (this.route.snapshot.queryParams) {
+      Object.getOwnPropertyNames(this.route.snapshot.queryParams).map(key => {
+        const value = this.route.snapshot.queryParams[key];
+        if (isNotEmpty(value)) {
+          this.pageState.filters[key] = value;
+        }
+      });
+    }
     this.serviceTplService.listPage(this.pageState, 0, this.serviceId)
       .subscribe(
         response => {
