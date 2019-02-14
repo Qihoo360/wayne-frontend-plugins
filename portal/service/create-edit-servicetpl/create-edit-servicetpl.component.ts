@@ -20,6 +20,8 @@ import { KubeService, ObjectMeta, ServicePort } from '../../../shared/model/kube
 import { ServiceTplService } from '../../../shared/client/v1/servicetpl.service';
 import { ServiceService } from '../../../shared/client/v1/service.service';
 import { AuthService } from '../../../../src/app/shared/auth/auth.service';
+import { DeploymentService } from '../../../../src/app/shared/client/v1/deployment.service';
+import { Deployment } from '../../../../src/app/shared/model/v1/deployment';
 
 @Component({
   selector: 'create-edit-servicetpl',
@@ -42,9 +44,11 @@ export class CreateEditServiceTplComponent implements OnInit {
   labelSelector = [];
   headless: boolean;
 
+  deploys: Deployment[];
 
   constructor(private serviceTplService: ServiceTplService,
               private serviceService: ServiceService,
+              private deploymentService: DeploymentService,
               private location: Location,
               private router: Router,
               private appService: AppService,
@@ -105,6 +109,7 @@ export class CreateEditServiceTplComponent implements OnInit {
     const observables = Array(
       this.appService.getById(appId, namespaceId),
       this.serviceService.getById(serviceId, appId),
+      this.deploymentService.getNames(appId)
     );
     if (tplId) {
       this.actionType = ActionType.EDIT;
@@ -116,7 +121,8 @@ export class CreateEditServiceTplComponent implements OnInit {
       response => {
         this.app = response[0].data;
         this.service = response[1].data;
-        const tpl = response[2];
+        this.deploys = response[2].data;
+        const tpl = response[3];
         if (tpl) {
           this.serviceTpl = tpl.data;
           this.serviceTpl.description = null;
