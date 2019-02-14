@@ -15,7 +15,7 @@
         </textarea>
       </div>
     </section>
-    <section class="form-block wrap" style="overflow:hidden">
+    <section class="form-block wrap">
       <div style="float: left;width: 60%">
         <label class="label-level1">服务配置</label>
         <div class="form-group form-group-padding">
@@ -95,11 +95,11 @@
                      [(ngModel)]="selector.key"
                      required
                      placeholder="selector名称">
-              <input type="text" style="width: 217px"
-                     name="selector.value-{{i}}"
-                     [(ngModel)]="selector.value"
-                     required
-                     placeholder="selector值">
+              <wayne-select inputable name="selector.value-{{i}}" [(ngModel)]="selector.value"
+                            searchable
+                            [placeholder]="'PLACEHOLDER.CHOOSE' | translate">
+                <wayne-option *ngFor="let deploy of deploys" [value]="deploy.name">{{deploy.name}}</wayne-option>
+              </wayne-select>
               <a href="javascript:void(0)">
                 <clr-icon (click)="onDeleteSelector(i)"
                           shape="trash" title="删除选择器" class="is-solid clr-icon"></clr-icon>
@@ -130,13 +130,11 @@ ExternalName: 将集群或者项目外部服务映射到集群或项目内。<br
 Headless: 集群不为服务生成IP，集群内部通过服务的后端 Endpoint IP 直接访问服务。此类型适合后端异构的服务，比如需要区分主从的服务。</span>
       </div>
     </section>
-
-
-    <div class="clr-wizard-footer-buttons" style="padding-top: 30px">
-      <button type="button" class="btn btn-outline" (click)="onCancel()">取消</button>
-      <button type="button" class="btn btn-primary" (click)="openModal()">高级配置</button>
-      <button type="button" class="btn btn-primary" [disabled]="!isValid" (click)="onSubmit()">提交</button>
-    </div>
   </form>
+</div>
+<div class="clr-wizard-footer-buttons tpl-bottom" [style.top.px]="top">
+  <button type="button" class="btn btn-outline" (click)="onCancel()">取消</button>
+  <button type="button" class="btn btn-primary" (click)="openModal()">高级配置</button>
+  <button type="button" class="btn btn-primary" [disabled]="!isValid" (click)="onSubmit()">提交</button>
 </div>
 <wayne-ace-editor (outputObj)="saveServiceTpl($event)"></wayne-ace-editor>
