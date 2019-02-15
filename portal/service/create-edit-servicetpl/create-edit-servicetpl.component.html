@@ -22,9 +22,9 @@
           <label class="clr-col-md-3 form-group-label-override required">类型</label>
           <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left">
             <div class="select">
-              <select name="serviceType" [(ngModel)]="kubeService.spec.type">
+              <select name="serviceType" required [(ngModel)]="kubeService.spec.type">
                 <option value="ClusterIP" selected>ClusterIP</option>
-                <!--<option value="Headless">Headless</option>-->
+                <option value="LoadBalancer">LoadBalancer</option>
                 <option value="NodePort">NodePort</option>
                 <option value="ExternalName">ExternalName</option>
               </select>
@@ -37,7 +37,7 @@
             Headless
           </clr-checkbox> -->
           <clr-checkbox-wrapper style="margin-left: 20px;padding-top: 5px">
-              <input type="checkbox" clrCheckbox name="headless" required value="Headless" [(ngModel)]="headless" />
+              <input type="checkbox" clrCheckbox name="headless" value="Headless" [(ngModel)]="headless" />
               <label>Headless</label>
             </clr-checkbox-wrapper>
         </div>
@@ -126,6 +126,7 @@
       <span><h4>服务类型说明</h4>
 ClusterIP: 以集群为服务生成的集群内唯一的IP为基础，集群内部可以通过此IP来访问服务。<br>
 NodePort: 设置类型为NodePort时，集群外部可以通过 NodePort方式来访问服务。<br>
+LoadBalancer: 表示服务将通过外部负载均衡器暴露（如果云提供商支持它）<br>
 ExternalName: 将集群或者项目外部服务映射到集群或项目内。<br>
 Headless: 集群不为服务生成IP，集群内部通过服务的后端 Endpoint IP 直接访问服务。此类型适合后端异构的服务，比如需要区分主从的服务。</span>
       </div>
