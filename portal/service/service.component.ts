@@ -422,13 +422,13 @@ export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
   }
 
   openModal(): void {
-    this.createEdit.newOrEditService(this.app, this.filterCluster());
+    this.createEdit.newOrEditResource(this.app, this.filterCluster());
   }
 
 
 
   editService() {
-    this.createEdit.newOrEditService(this.app, this.filterCluster(), this.serviceId);
+    this.createEdit.newOrEditResource(this.app, this.filterCluster(), this.serviceId);
   }
 
   filterCluster(): Cluster[] {
