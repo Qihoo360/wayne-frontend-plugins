@@ -7,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { KubeService } from '../../../shared/model/kubernetes/service';
 import { ServiceClient } from '../../../shared/client/v1/kubernetes/service';
 import { ServiceTpl } from '../../../shared/model/servicetpl';
+import { KubernetesClient } from '../../../../src/app/shared/client/v1/kubernetes/kubernetes';
+import { KubeResourceService } from '../../../../src/app/shared/shared.const';
 
 @Component({
   selector: 'status',
@@ -20,6 +22,7 @@ export class ServiceStatusComponent {
 
   constructor(private messageHandlerService: MessageHandlerService,
               private serviceClient: ServiceClient,
+              private kubernetesClient: KubernetesClient,
               private route: ActivatedRoute,
               public cacheService: CacheService) {
   }
@@ -54,7 +57,8 @@ export class ServiceStatusComponent {
     this.createAppOpened = true;
 
     const service: KubeService = JSON.parse(serviceTpl.template);
-    this.serviceClient.get(this.appId, cluster, this.cacheService.kubeNamespace, service.metadata.name).subscribe(
+    this.kubernetesClient.get(cluster, KubeResourceService, service.metadata.name, this.cacheService.kubeNamespace,
+      this.appId.toString()).subscribe(
       response => {
         this.service = response.data;
       },

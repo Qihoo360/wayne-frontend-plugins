@@ -30,7 +30,7 @@
         发布历史
       </button>
       <button (click)="deleteService()" class="wayne-button normal"
-              *ngIf="authService.currentAppPermission.service.offline || authService.currentUser.admin">
+              *ngIf="authService.currentAppPermission.service.delete || authService.currentUser.admin">
         删除负载均衡
       </button>
       <button class="wayne-button normal" (click)="diffTpl()">{{'BUTTON.COMPARE_TEMPLATES' | translate}}</button>

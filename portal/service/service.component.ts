@@ -6,6 +6,7 @@ import {
   ConfirmationState,
   ConfirmationTargets,
   httpStatusCode,
+  KubeResourceService,
   PublishType,
   syncStatusInterval,
   TemplateState
@@ -36,6 +37,7 @@ import { ServiceService } from '../../shared/client/v1/service.service';
 import { PublishHistoryService } from '../../../src/app/portal/common/publish-history/publish-history.service';
 import { ServiceTplService } from '../../shared/client/v1/servicetpl.service';
 import { KubeService } from '../../shared/model/kubernetes/service';
+import { KubernetesClient } from '../../../src/app/shared/client/v1/kubernetes/kubernetes';
 
 const showState = {
   'create_time': {hidden: false},
@@ -83,6 +85,7 @@ export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
               private clusterService: ClusterService,
               private deletionDialogService: ConfirmationDialogService,
               private serviceClient: ServiceClient,
+              private kubernetesClient: KubernetesClient,
               private serviceService: ServiceService,
               private publishHistoryService: PublishHistoryService,
               private tabDragService: TabDragService,
@@ -90,7 +93,9 @@ export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
               private serviceTplService: ServiceTplService,
               private messageHandlerService: MessageHandlerService) {
     this.tabScription = this.tabDragService.tabDragOverObservable.subscribe(over => {
-      if (over) { this.tabChange(); }
+      if (over) {
+        this.tabChange();
+      }
     });
     this.subscription = deletionDialogService.confirmationConfirm$.subscribe(message => {
       if (message &&
@@ -120,7 +125,9 @@ export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
   initShow() {
     this.showList = [];
     Object.keys(this.showState).forEach(key => {
-      if (!this.showState[key].hidden) { this.showList.push(key); }
+      if (!this.showState[key].hidden) {
+        this.showList.push(key);
+      }
     });
   }
 
@@ -149,7 +156,9 @@ export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
         order: index
       };
     });
-    if (this.orderCache && JSON.stringify(this.orderCache) === JSON.stringify(orderList)) { return; }
+    if (this.orderCache && JSON.stringify(this.orderCache) === JSON.stringify(orderList)) {
+      return;
+    }
     this.serviceService.updateOrder(this.appId, orderList).subscribe(
       response => {
         if (response.data === 'ok!') {
@@ -194,8 +203,11 @@ export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
         if (tpl.status && tpl.status.length > 0) {
           for (let j = 0; j < tpl.status.length; j++) {
             const status = tpl.status[j];
-            if (status.errNum > 2)  { continue; }
-            this.serviceClient.get(this.appId, status.cluster, this.cacheService.kubeNamespace, tpl.name).subscribe(
+            if (status.errNum > 2) {
+              continue;
+            }
+            this.kubernetesClient.get(status.cluster, KubeResourceService, tpl.name, this.cacheService.kubeNamespace,
+              this.appId.toString()).subscribe(
               response => {
                 const code = response.statusCode || response.status;
                 if (code === httpStatusCode.NoContent) {

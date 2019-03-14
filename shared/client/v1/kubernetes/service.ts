@@ -13,17 +13,4 @@ export class ServiceClient {
       .catch(error => throwError(error));
   }
 
-  get(appId: number, cluster: string, namespace: string, name: string): Observable<any> {
-    return this.http
-      .get(`/api/v1/kubernetes/apps/${appId}/services/${name}/namespaces/${namespace}/clusters/${cluster}`)
-      .catch(error => throwError(error));
-  }
-
-
-  deleteByName(appId: number, cluster: string, namespace: string, name: string): Observable<any> {
-    return this.http
-      .delete(`/api/v1/kubernetes/apps/${appId}/services/${name}/namespaces/${namespace}/clusters/${cluster}`)
-      .catch(error => throwError(error));
-  }
-
 }

@@ -59,7 +59,7 @@
     <clr-dg-cell class="col-operate">
       <button class="wayne-button text"
               (click)="publishServiceTpl(serviceTpl)"
-              *ngIf="authService.currentAppPermission.service.deploy || authService.currentUser.admin">
+              *ngIf="authService.currentAppPermission.kubeService.create || authService.currentUser.admin">
         发布
       </button>
       <button class="wayne-button text"
@@ -79,7 +79,7 @@
       </button>
       <button class="wayne-button text"
               (click)="offlineServiceTpl(serviceTpl)"
-              *ngIf="serviceTpl.status && (authService.currentAppPermission.service.offline || authService.currentUser.admin)">
+              *ngIf="serviceTpl.status && (authService.currentAppPermission.kubeService.delete || authService.currentUser.admin)">
         下线
       </button>
 

@@ -6,14 +6,15 @@ import { NgForm } from '@angular/forms';
 import { MessageHandlerService } from '../../../../src/app/shared/message-handler/message-handler.service';
 import { Cluster } from '../../../../src/app/shared/model/v1/cluster';
 import { CacheService } from '../../../../src/app/shared/auth/cache.service';
-import { ResourcesActionType } from '../../../../src/app/shared/shared.const';
+import { KubeResourceService, ResourcesActionType } from '../../../../src/app/shared/shared.const';
 import { PublishStatus } from '../../../../src/app/shared/model/v1/publish-status';
 import { PublishStatusService } from '../../../../src/app/shared/client/v1/publishstatus.service';
 import { ServiceTpl } from '../../../shared/model/servicetpl';
 import { ServiceService } from '../../../shared/client/v1/service.service';
-import { ServiceClient } from '../../../shared/client/v1/kubernetes/service';
 import { Service } from '../../../shared/model/service';
 import { KubeService } from '../../../shared/model/kubernetes/service';
+import { KubernetesClient } from '../../../../src/app/shared/client/v1/kubernetes/kubernetes';
+import { ServiceClient } from '../../../shared/client/v1/kubernetes/service';
 
 @Component({
   selector: 'publish-tpl',
@@ -37,6 +38,7 @@ export class PublishServiceTplComponent {
   constructor(private messageHandlerService: MessageHandlerService,
               public cacheService: CacheService,
               private serviceService: ServiceService,
+              private kubernetesClient: KubernetesClient,
               private serviceClient: ServiceClient,
               private publishStatusService: PublishStatusService) {
   }
@@ -115,7 +117,8 @@ export class PublishServiceTplComponent {
 
   offline(cluster: Cluster) {
     const state = this.getStatusByCluster(this.serviceTpl.status, cluster.name);
-    this.serviceClient.deleteByName(this.appId, cluster.name, this.cacheService.kubeNamespace, this.serviceTpl.name).subscribe(
+    this.kubernetesClient.delete(cluster.name, KubeResourceService, false, this.serviceTpl.name,
+      this.cacheService.kubeNamespace, this.appId.toString()).subscribe(
       response => {
         this.deletePublishStatus(state.id);
       },
