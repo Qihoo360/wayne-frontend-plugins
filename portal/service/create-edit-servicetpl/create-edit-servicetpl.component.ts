@@ -156,6 +156,7 @@ export class CreateEditServiceTplComponent implements OnInit {
 
     this.serviceTpl.id = undefined;
     this.serviceTpl.name = this.service.name;
+    this.serviceTpl.createTime = this.serviceTpl.updateTime = new Date();
     this.serviceTplService.create(this.serviceTpl, this.app.id).subscribe(
       status => {
         this.isSubmitOnGoing = false;

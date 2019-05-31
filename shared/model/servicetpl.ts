@@ -10,6 +10,7 @@ export class ServiceTpl {
   deleted: boolean;
   user: string;
   createTime: Date;
+  updateTime?: Date;
   service: Service;
 
   ports: string;
