@@ -18,9 +18,9 @@ import { PageState } from '../../../src/app/shared/page/page-state';
   styleUrls: ['./service.component.scss']
 })
 export class ServiceComponent implements OnInit, OnDestroy {
-  @ViewChild(ListServiceComponent)
+  @ViewChild(ListServiceComponent, { static: false })
   list: ListServiceComponent;
-  @ViewChild(CreateEditServiceComponent)
+  @ViewChild(CreateEditServiceComponent, { static: false })
   createEdit: CreateEditServiceComponent;
 
   pageState: PageState = new PageState();

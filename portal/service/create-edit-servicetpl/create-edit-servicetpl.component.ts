@@ -30,7 +30,7 @@ import { Deployment } from '../../../../src/app/shared/model/v1/deployment';
 })
 export class CreateEditServiceTplComponent implements OnInit {
   ngForm: NgForm;
-  @ViewChild('ngForm')
+  @ViewChild('ngForm', { static: false })
   currentForm: NgForm;
 
   serviceTpl: ServiceTpl = new ServiceTpl();

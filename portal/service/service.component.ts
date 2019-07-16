@@ -54,9 +54,9 @@ const showState = {
   styleUrls: ['./service.component.scss']
 })
 export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
-  @ViewChild(ListServiceComponent)
+  @ViewChild(ListServiceComponent, { static: false })
   list: ListServiceComponent;
-  @ViewChild(CreateEditServiceComponent)
+  @ViewChild(CreateEditServiceComponent, { static: false })
   createEdit: CreateEditServiceComponent;
   serviceId: number;
   pageState: PageState = new PageState();

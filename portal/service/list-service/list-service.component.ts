@@ -34,9 +34,9 @@ import { DiffService } from '../../../../src/app/shared/diff/diff.service';
 export class ListServiceComponent implements OnInit, OnDestroy {
   selected: ServiceTpl[] = [];
   @Input() showState: object;
-  @ViewChild(PublishServiceTplComponent)
+  @ViewChild(PublishServiceTplComponent, { static: false })
   publishTpl: PublishServiceTplComponent;
-  @ViewChild(ServiceStatusComponent)
+  @ViewChild(ServiceStatusComponent, { static: false })
   serviceStatus: ServiceStatusComponent;
 
   @Input() services: Service[];
