@@ -1,31 +1,31 @@
 <clr-modal [clrModalSize]="''" [(clrModalOpen)]="modalOpened">
   <h3 class="modal-title">{{title}}</h3>
   <div class="modal-body">
-    <form #publishForm="ngForm">
-      <section class="form-block">
-        <div class="form-group" style="padding-left: 135px;">
-          <label class="clr-col-md-3 form-group-label-override required">机房</label>
-          <div *ngFor="let cluster of clusters;let i=index" style="padding-right: 20px" class="checkbox-inline">
-            <input [(ngModel)]="cluster['checked']"
-                   type="checkbox"
-                   id="{{i}}-check"
-                   name="{{i}}-check">
+    <form #publishForm="ngForm" clrForm clrLayout="horizontal">
+      <div class="clr-form-control clr-row">
+        <label class="clr-control-label required">机房</label>
+        <div class="clr-control-container clr-col-md-10 clr-col-12">
+          <div class="clr-checkbox-wrapper" *ngFor="let cluster of clusters;let i=index" style="display: inline-block;">
+            <input class="clr-checkbox" [(ngModel)]="cluster['checked']" type="checkbox" id="{{i}}-check" name="{{i}}-check">
             <label for="{{i}}-check">{{cluster.name}}</label>
           </div>
         </div>
-        <div *ngIf="actionType==3" class="form-group" style="padding-left: 135px;">
-          <label class="clr-col-md-3 form-group-label-override">强制下线
-            <a role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
-              <clr-icon shape="info-circle" size="24"></clr-icon>
-              <span class="tooltip-content">确认资源已经不存在于Kubernetes，可以打开此开关强制下线</span>
-            </a>
-          </label>
-          <div class="toggle-switch" style="top: .25rem">
-            <input [(ngModel)]="forceOffline" type="checkbox" id="force-offline-id" name="force-offline">
+      </div>
+      <div class="clr-form-control clr-row" *ngIf="actionType==3">
+        <label class="clr-control-label">
+          强制下线
+          <a role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+            <clr-icon shape="info-circle" size="24"></clr-icon>
+            <span class="tooltip-content">确认资源已经不存在于Kubernetes，可以打开此开关强制下线</span>
+          </a>
+        </label>
+        <div class="clr-control-container clr-col-md-10 clr-col-12">
+          <div class="clr-toggle-wrapper">
+            <input [(ngModel)]="forceOffline" class="clr-toggle" type="checkbox" id="force-offline-id" name="force-offline">
             <label for="force-offline-id"></label>
           </div>
         </div>
-      </section>
+      </div>
     </form>
   </div>
   <div class="modal-footer">
