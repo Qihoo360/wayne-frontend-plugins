@@ -54,9 +54,9 @@ const showState = {
   styleUrls: ['./service.component.scss']
 })
 export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
-  @ViewChild(ListServiceComponent)
+  @ViewChild(ListServiceComponent, { static: false })
   list: ListServiceComponent;
-  @ViewChild(CreateEditServiceComponent)
+  @ViewChild(CreateEditServiceComponent, { static: false })
   createEdit: CreateEditServiceComponent;
   serviceId: number;
   pageState: PageState = new PageState();
@@ -271,9 +271,9 @@ export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
     const namespaceId = this.cacheService.namespaceId;
     this.serviceId = parseInt(this.route.snapshot.params['serviceId'], 10);
     combineLatest(
-      this.serviceService.list(new PageState({pageSize: 50}), 'false', this.appId.toString()),
+      [this.serviceService.list(new PageState({pageSize: 50}), 'false', this.appId.toString()),
       this.appService.getById(this.appId, namespaceId),
-      this.clusterService.getNames(),
+      this.clusterService.getNames()]
     ).subscribe(
       response => {
         this.services = response[0].data.list.sort((a, b) => a.order - b.order);
@@ -350,8 +350,8 @@ export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
     this.pageState.params['deleted'] = false;
     this.pageState.params['isOnline'] = this.isOnline;
     combineLatest(
-      this.serviceTplService.listPage(this.pageState, this.app.id, this.serviceId.toString()),
-      this.publishService.listStatus(PublishType.SERVICE, this.serviceId)
+      [this.serviceTplService.listPage(this.pageState, this.app.id, this.serviceId.toString()),
+      this.publishService.listStatus(PublishType.SERVICE, this.serviceId)]
     ).subscribe(
       response => {
         const status = response[1].data;

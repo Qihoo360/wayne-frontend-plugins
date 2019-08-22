@@ -24,7 +24,7 @@ export class CreateEditServiceTplComponent implements OnInit {
   modalOpened: boolean;
 
   ngForm: NgForm;
-  @ViewChild('ngForm')
+  @ViewChild('ngForm', { static: false })
   currentForm: NgForm;
 
   serviceTpl: ServiceTpl = new ServiceTpl();
@@ -36,7 +36,7 @@ export class CreateEditServiceTplComponent implements OnInit {
 
   services: Service[];
 
-  @ViewChild(AceEditorBoxComponent) aceBox: any;
+  @ViewChild(AceEditorBoxComponent, { static: false }) aceBox: any;
 
   constructor(private serviceTplService: ServiceTplService,
               private serviceService: ServiceService,

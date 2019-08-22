@@ -1,46 +1,38 @@
-<div class="clr-row" style="padding-left: 20px;margin-bottom: 20px;">
+<div class="clr-row" style="padding-left: 20px;padding-right: 20px;margin-bottom: 20px;">
   <div class="clr-row flex-items-xs-between flex-items-xs-top" style="padding-left: 15px; padding-right: 15px;">
     <h3 class="header-title">创建负载均衡模版</h3>
   </div>
-  <form #ngForm="ngForm" style="padding-right: 30px;width: 100%">
-    <wayne-box style="display: block;padding: 15px;">
-      <section class="form-block wrap">
-        <label class="label-level1">发布信息</label>
-        <div class="form-group form-group-padding">
-          <label class="clr-col-md-3 form-group-label-override required">发布说明</label>
-          <textarea name="description"
-                    [(ngModel)]="serviceTpl.description"
-                    required
-                    rows="3"
-                    style="width: 700px;">
-          </textarea>
-        </div>
-      </section>
-      <section class="form-block wrap">
-        <div style="display: inline-block;width: 60%">
-          <label class="label-level1">服务配置</label>
-          <div class="form-group form-group-padding">
-            <label class="clr-col-md-3 form-group-label-override required">类型</label>
-            <label aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-md tooltip-bottom-left">
-              <div class="select">
-                <select name="serviceType" required [(ngModel)]="kubeService.spec.type">
+  <form #ngForm="ngForm" clrForm clrLayout="horizontal">
+    <wayne-collapse>
+      <label class="label-level1">发布信息</label>
+      <clr-textarea-container>
+        <label class="required">{{'TEMPLATE.RELEASE_EXPLAIN' | translate}}</label>
+        <textarea clrTextarea name="description" [(ngModel)]="serviceTpl.description" rows="3" style="width: 65%"
+          required>
+              </textarea>
+        <clr-control-error>description is required</clr-control-error>
+      </clr-textarea-container>
+    </wayne-collapse>
+    <wayne-collapse>
+      <label class="label-level1">服务配置</label>
+      <div class="clr-row">
+        <div class="clr-col-8">
+          <div class="clr-form-control">
+            <label class="required clr-control-label">类型</label>
+            <div class="clr-control-container">
+              <div class="clr-select-wrapper">
+                <select class="clr-select" name="serviceType" required [(ngModel)]="kubeService.spec.type">
                   <option value="ClusterIP" selected>ClusterIP</option>
                   <option value="LoadBalancer">LoadBalancer</option>
                   <option value="NodePort">NodePort</option>
                   <option value="ExternalName">ExternalName</option>
                 </select>
               </div>
-            </label>
-            <!-- <clr-checkbox
-              style="margin-left: 20px;padding-top: 5px"
-              name="headless"
-              [(ngModel)]="headless">
-              Headless
-            </clr-checkbox> -->
-            <clr-checkbox-wrapper style="margin-left: 20px;padding-top: 5px">
-                <input type="checkbox" clrCheckbox name="headless" value="Headless" [(ngModel)]="headless" />
-                <label>Headless</label>
-              </clr-checkbox-wrapper>
+            </div>
+            <clr-checkbox-wrapper style="padding-left: 20px;">
+              <input type="checkbox" clrCheckbox name="headless" value="Headless" [(ngModel)]="headless" />
+              <label>Headless</label>
+            </clr-checkbox-wrapper>
           </div>
           <div *ngIf="kubeService.spec.type != 'ExternalName'">
             <label class="label-level2">端口
@@ -51,20 +43,20 @@
             </label>
             <div *ngFor="let port of kubeService.spec.ports; let i = index">
               <div class="form-group form-group-padding">
-                <label class="clr-col-md-3 form-group-label-override required">端口</label>
-
-                <input type="number" style="width: 180px"
+                <label class="clr-control-label required">端口</label>
+    
+                <input class="clr-input" type="number" style="width: 180px"
                       name="port.targetPort-{{i}}"
                       [(ngModel)]="port.targetPort"
                       required
                       placeholder="目标端口">
-                <input type="number" style="width: 180px"
+                <input class="clr-input" type="number" style="width: 180px; margin: 0 5px;"
                       name="port.port-{{i}}"
                       [(ngModel)]="port.port"
                       required
                       placeholder="端口">
-                <div class="select">
-                  <select name="port.protocol-{{i}}"
+                <div class="clr-select-wrapper">
+                  <select class="clr-select" name="port.protocol-{{i}}"
                           [(ngModel)]="port.protocol">
                     <option value="TCP" selected>TCP</option>
                     <option value="UDP">UDP</option>
@@ -90,8 +82,8 @@
             </label>
             <div *ngFor="let selector of labelSelector; let i = index">
               <div class="form-group form-group-padding">
-                <label class="clr-col-md-3 form-group-label-override required">选择器</label>
-                <input type="text" style="width: 217px"
+                <label class="clr-control-label required">选择器</label>
+                <input class="clr-input" type="text" style="width: 217px; padding-right: 5px;"
                       name="selector.key-{{i}}"
                       [(ngModel)]="selector.key"
                       required
@@ -116,23 +108,23 @@
             <label class="label-level2">外部域名</label>
             <div class="form-group form-group-padding">
               <label class="clr-col-md-3 form-group-label-override required">域名</label>
-              <input type="text" style="width: 217px"
+              <input class="clr-input" type="text" style="width: 217px"
                     name="externalName"
                     [(ngModel)]="kubeService.spec.externalName"
                     required>
             </div>
           </div>
         </div>
-        <div style="display: inline-block;width: 40%;margin-top: 5px">
-        <span><h4>服务类型说明</h4>
-  ClusterIP: 以集群为服务生成的集群内唯一的IP为基础，集群内部可以通过此IP来访问服务。<br>
-  NodePort: 设置类型为NodePort时，集群外部可以通过 NodePort方式来访问服务。<br>
-  LoadBalancer: 表示服务将通过外部负载均衡器暴露（如果云提供商支持它）<br>
-  ExternalName: 将集群或者项目外部服务映射到集群或项目内。<br>
-  Headless: 集群不为服务生成IP，集群内部通过服务的后端 Endpoint IP 直接访问服务。此类型适合后端异构的服务，比如需要区分主从的服务。</span>
+        <div class="clr-col-4">
+          <span><h4>服务类型说明</h4>
+    ClusterIP: 以集群为服务生成的集群内唯一的IP为基础，集群内部可以通过此IP来访问服务。<br>
+    NodePort: 设置类型为NodePort时，集群外部可以通过 NodePort方式来访问服务。<br>
+    LoadBalancer: 表示服务将通过外部负载均衡器暴露（如果云提供商支持它）<br>
+    ExternalName: 将集群或者项目外部服务映射到集群或项目内。<br>
+    Headless: 集群不为服务生成IP，集群内部通过服务的后端 Endpoint IP 直接访问服务。此类型适合后端异构的服务，比如需要区分主从的服务。</span>
         </div>
-      </section>
-    </wayne-box>
+      </div>
+    </wayne-collapse>
   </form>
 </div>
 <div class="clr-wizard-footer-buttons tpl-bottom">
