@@ -74,6 +74,7 @@ export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
   orderCache: Array<OrderItem>;
   showList: any[] = new Array();
   showState: object = showState;
+  leave = false;
 
 
   constructor(private route: ActivatedRoute,
@@ -332,6 +333,7 @@ export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     clearInterval(this.timer);
+    this.leave = true;
     this.subscription.unsubscribe();
     this.tabScription.unsubscribe();
   }
@@ -372,7 +374,12 @@ export class ServiceComponent implements AfterContentInit, OnInit, OnDestroy {
         this.pageState.page.totalPage = tpls.totalPage;
         this.pageState.page.totalCount = tpls.totalCount;
         this.serviceTpls = this.buildTplList(tpls.list);
-        this.syncStatus();
+        setTimeout(() => {
+          if (this.leave) {
+            return;
+          }
+          this.syncStatus();
+        });
       },
       error => this.messageHandlerService.handleError(error)
     );
